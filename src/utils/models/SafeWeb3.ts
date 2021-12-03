@@ -2,7 +2,6 @@ import Network from "./Network";
 import Web3 from "web3";
 import {Contract} from 'web3-eth-contract';
 import SmartContract from "../../SmartContract/models/SmartContract"
-import AbiItem from "web3"
 
 
 type ProviderConf = {
