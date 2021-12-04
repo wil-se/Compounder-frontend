@@ -87,7 +87,7 @@ class MasterChef {
                 console.log("\n[OWNER]");
                 console.log("Owner " + stSymbol + " (ST) Balance: " + new BigNumber(ownerStBal).shiftedBy(-1*stDecimals).toNumber() + " " + stSymbol);
                 console.log("Owner " + rtSymbol + " (RT) Balance: " + new BigNumber(ownerRtBal).shiftedBy(-1*rtDecimals).toNumber() + " " + rtSymbol);
-                console.log("Owner MATIC (gas) Balance: " + new BigNumber(ownerEtBal).shiftedBy(-18).toNumber() + " MATIC");
+                console.log("Owner CRO (gas) Balance: " + new BigNumber(ownerEtBal).shiftedBy(-18).toNumber() + " CRO");
             }
             return values;
         }catch(err){

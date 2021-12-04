@@ -57,7 +57,7 @@ class Dex {
         
         let token: Contract = this.safeWeb3.getContract(contract);
         let tokenDecimals: number = Number(await token.methods.decimals().call());
-        let tokenBalance: number = Number(await token.methods.balanceOf(this.safeWeb3.admin()).call());
+        let tokenBalance: BigNumber = new BigNumber(await token.methods.balanceOf(this.safeWeb3.admin()).call());
         var parsed: number = new BigNumber(tokenBalance).shiftedBy(-1*tokenDecimals).toNumber();
         var tokenPrice: number = Number(await this.getPrice(contract));
         var asusdc = parsed*tokenPrice;
@@ -69,7 +69,7 @@ class Dex {
 
             try {
                 await this.approve(contract, this.routerAddress);
-                var [, amountOut] = await this.router.methods.getAmountsOut(tokenBalance, path).call()[1];
+                var [, amountOut] = await this.router.methods.getAmountsOut(tokenBalance, path).call();
                 console.log("AmountOut: "+amountOut);
             } catch(e) {
                 console.log("AmountsOut: "+e);
