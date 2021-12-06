@@ -16,6 +16,8 @@ import SettingsTwoToneIcon from '@mui/icons-material/SettingsTwoTone';
 import TrafficTwoToneIcon from '@mui/icons-material/TrafficTwoTone';
 import VerifiedUserTwoToneIcon from '@mui/icons-material/VerifiedUserTwoTone';
 import AccountTreeTwoToneIcon from '@mui/icons-material/AccountTreeTwoTone';
+import DocumentScannerTwoToneIcon from '@mui/icons-material/DocumentScannerTwoTone';
+import AlignVerticalCenterTwoToneIcon from '@mui/icons-material/AlignVerticalCenterTwoTone';
 
 
 export interface MenuItem {
@@ -40,11 +42,22 @@ const menuItems: MenuItems[] = [
         link: '/dashboard',
         icon: TableChartTwoToneIcon
       },
-      // {
-      //   name: 'Messenger',
-      //   icon: AccountTreeTwoToneIcon,
-      //   link: '/messenger'
-      // },
+      {
+        name: 'Networks',
+        icon: AccountTreeTwoToneIcon,
+        link: '/networks'
+      },
+      {
+        name: 'Contracts',
+        icon: DocumentScannerTwoToneIcon,
+        link: '/dashboard'
+      },
+      {
+        name: 'DEXs',
+        icon: AlignVerticalCenterTwoToneIcon,
+        link: '/dashboard'
+      },
+      
     ]
   },
 ];

@@ -45,6 +45,13 @@ function Header() {
       </Box>
       <Box display="flex" alignItems="center">
         <HeaderButtons />
+        <Hidden lgUp>
+          <Tooltip arrow title="Toggle Menu">
+            <IconButton color="primary" onClick={toggleSidebar}>
+              {!sidebarToggle ? <MenuTwoToneIcon /> : <CloseTwoToneIcon />}
+            </IconButton>
+          </Tooltip>
+        </Hidden>
       </Box>
     </HeaderWrapper>
   );

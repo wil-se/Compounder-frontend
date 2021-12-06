@@ -18,6 +18,7 @@ const Loader = (Component) => (props) => (
 
 const Crypto = Loader(lazy(() => import('src/content/dashboards/Crypto')));
 
+const Networks = Loader(lazy(() => import('src/content/networks')))
 
 // Status
 
@@ -97,6 +98,19 @@ const routes: PartialRouteObject[] = [
       },
     ]
   },
+  {
+    path: 'networks',
+    element: (
+      <SidebarLayout />
+    ),
+    children: [
+      {
+        path: '/',
+        element: <Networks />,
+      },
+    ]
+  },
+  
   
 ];
 
