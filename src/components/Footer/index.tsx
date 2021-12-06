@@ -25,7 +25,7 @@ function Footer() {
             </Typography>
           </Box>
           <Typography sx={{ pt: { xs: 2, md: 0 } }} variant="subtitle1">
-            Crafted by <Link href="https://bloomui.com" target="_blank" rel="noopener noreferrer">BloomUI.com</Link>
+            Crafted by <Link href="" target="_blank" rel="noopener noreferrer">ice0x0</Link>
           </Typography>
         </Box>
       </Container>
