@@ -22,6 +22,7 @@ import ListItemText from '@mui/material/ListItemText';
 import DialogTitle from '@mui/material/DialogTitle';
 import Dialog from '@mui/material/Dialog';
 import AddIcon from '@mui/icons-material/Add';
+import TextField from '@mui/material/TextField';
 
 
 
@@ -47,7 +48,50 @@ function SimpleDialog(props) {
     <Dialog onClose={handleClose} open={open}>
       <DialogTitle>Set up network</DialogTitle>
       <List sx={{ pt: 0 }}>
-        
+      <ListItem>
+      
+                    <TextField
+                      id="outlined-helperText"
+                      label="Name"
+                      defaultValue=""
+                      helperText=""
+                    />
+        </ListItem>
+
+      <ListItem>
+      
+                    <TextField
+                      id="outlined-helperText"
+                      label="ID"
+                      defaultValue=""
+                      helperText=""
+                    />
+        </ListItem>
+
+
+        <ListItem>
+      
+      <TextField
+        id="outlined-helperText"
+        label="WSS"
+        defaultValue=""
+        helperText=""
+      />
+      
+      </ListItem>
+
+
+      <ListItem>
+      
+      <TextField
+        id="outlined-helperText"
+        label="RPC"
+        defaultValue=""
+        helperText=""
+      />
+      
+      </ListItem>
+
 
         <ListItem autoFocus button onClick={() => handleListItemClick('addAccount')}>
           <ListItemAvatar>
@@ -57,6 +101,7 @@ function SimpleDialog(props) {
           </ListItemAvatar>
           <ListItemText primary="Add network" />
         </ListItem>
+      
       </List>
     </Dialog>
   );
