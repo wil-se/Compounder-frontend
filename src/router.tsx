@@ -19,6 +19,11 @@ const Loader = (Component) => (props) => (
 const Crypto = Loader(lazy(() => import('src/content/dashboards/Crypto')));
 
 const Networks = Loader(lazy(() => import('src/content/networks')))
+const Tokens = Loader(lazy(() => import('src/content/tokens')))
+const Farms = Loader(lazy(() => import('src/content/farms')))
+const Routers = Loader(lazy(() => import('src/content/routers')))
+const Compounders = Loader(lazy(() => import('src/content/compounders')))
+
 
 // Status
 
@@ -40,15 +45,6 @@ const routes: PartialRouteObject[] = [
             to="/dashboard"
             replace
           />)
-      },
-      {
-        path: 'overview',
-        element: (
-          <Navigate
-            to="/"
-            replace
-          />
-        )
       },
       {
         path: 'status',
@@ -107,6 +103,66 @@ const routes: PartialRouteObject[] = [
       {
         path: '/',
         element: <Networks />,
+      },
+    ]
+  },
+  {
+    path: 'tokens',
+    element: (
+      <SidebarLayout />
+    ),
+    children: [
+      {
+        path: '/',
+        element: <Tokens />,
+      },
+    ]
+  },
+  {
+    path: 'farms',
+    element: (
+      <SidebarLayout />
+    ),
+    children: [
+      {
+        path: '/',
+        element: <Farms />,
+      },
+    ]
+  },
+  {
+    path: 'routers',
+    element: (
+      <SidebarLayout />
+    ),
+    children: [
+      {
+        path: '/',
+        element: <Routers />,
+      },
+    ]
+  },
+  {
+    path: 'routers',
+    element: (
+      <SidebarLayout />
+    ),
+    children: [
+      {
+        path: '/',
+        element: <Routers />,
+      },
+    ]
+  },
+  {
+    path: 'compounders',
+    element: (
+      <SidebarLayout />
+    ),
+    children: [
+      {
+        path: '/',
+        element: <Compounders />,
       },
     ]
   },

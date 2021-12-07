@@ -18,6 +18,7 @@ import VerifiedUserTwoToneIcon from '@mui/icons-material/VerifiedUserTwoTone';
 import AccountTreeTwoToneIcon from '@mui/icons-material/AccountTreeTwoTone';
 import DocumentScannerTwoToneIcon from '@mui/icons-material/DocumentScannerTwoTone';
 import AlignVerticalCenterTwoToneIcon from '@mui/icons-material/AlignVerticalCenterTwoTone';
+import MonetizationOnTwoToneIcon from '@mui/icons-material/MonetizationOnTwoTone';
 
 
 export interface MenuItem {
@@ -48,16 +49,25 @@ const menuItems: MenuItems[] = [
         link: '/networks'
       },
       {
-        name: 'Contracts',
-        icon: DocumentScannerTwoToneIcon,
-        link: '/dashboard'
+        name: 'Tokens',
+        icon: MonetizationOnTwoToneIcon,
+        link: '/tokens'
       },
       {
-        name: 'DEXs',
+        name: 'Routers',
         icon: AlignVerticalCenterTwoToneIcon,
-        link: '/dashboard'
+        link: '/routers'
       },
-      
+      {
+        name: 'Farms',
+        icon: AlignVerticalCenterTwoToneIcon,
+        link: '/farms'
+      },
+      {
+        name: 'Compounders',
+        icon: AlignVerticalCenterTwoToneIcon,
+        link: '/compounders'
+      },
     ]
   },
 ];

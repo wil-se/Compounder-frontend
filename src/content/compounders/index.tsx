@@ -3,24 +3,22 @@ import PageTitleWrapper from 'src/components/PageTitleWrapper';
 import { Grid, Container } from '@mui/material';
 import Footer from 'src/components/Footer';
 import { Card } from '@mui/material';
-import NetworkList from './NetworkList';
 
 
-function Networks() {
+function Compounders() {
   return (
     <>
       <Helmet>
-        <title>Networks</title>
+        <title>Compounders</title>
       </Helmet>
       {/* <PageTitleWrapper>
         <PageHeader />
       </PageTitleWrapper> */}
       <Container maxWidth="xl">
-          <NetworkList/>
       </Container>
       <Footer />
     </>
   );
 }
 
-export default Networks;
+export default Compounders;

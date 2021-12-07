@@ -49,49 +49,59 @@ function SimpleDialog(props) {
       <DialogTitle>Set up network</DialogTitle>
       <List sx={{ pt: 0 }}>
       <ListItem>
-      
-                    <TextField
-                      id="outlined-helperText"
-                      label="Name"
-                      defaultValue=""
-                      helperText=""
-                    />
-        </ListItem>
+        <TextField
+          id="outlined-helperText"
+          label="Name"
+          defaultValue=""
+          helperText=""
+        />
+      </ListItem>
 
       <ListItem>
       
-                    <TextField
-                      id="outlined-helperText"
-                      label="ID"
-                      defaultValue=""
-                      helperText=""
-                    />
-        </ListItem>
+        <TextField
+          id="outlined-helperText"
+          label="ID"
+          defaultValue=""
+          helperText=""
+        />
+      </ListItem>
+      
+      <ListItem>
+      <Typography variant="body2" noWrap>
+                 write WSS and RPC list like:
+              </Typography>
+      </ListItem>
 
 
-        <ListItem>
-      
-      <TextField
-        id="outlined-helperText"
-        label="WSS"
-        defaultValue=""
-        helperText=""
-      />
-      
+      <ListItem>
+      <Typography variant="body1" noWrap>
+                link;link;link;
+              </Typography>
       </ListItem>
 
 
       <ListItem>
       
       <TextField
-        id="outlined-helperText"
-        label="RPC"
-        defaultValue=""
-        helperText=""
-      />
-      
+          id="filled-multiline-flexible"
+          label="WSS"
+          multiline
+          maxRows={128}
+          variant="outlined"
+        />
       </ListItem>
 
+      <ListItem>
+        <TextField
+          id="outlined-helperText"
+          label="RPC"
+          multiline
+          maxRows={128}
+          defaultValue=""
+          helperText=""
+        />
+      </ListItem>
 
         <ListItem autoFocus button onClick={() => handleListItemClick('addAccount')}>
           <ListItemAvatar>
@@ -116,7 +126,7 @@ SimpleDialog.propTypes = {
 
   
 
-function Wallets() {
+function NetworkList() {
 
   const [open, setOpen] = useState(false);
   const [selectedValue, setSelectedValue] = useState("");
@@ -148,33 +158,20 @@ function Wallets() {
 
           Add new network
         </Button>
+        </Box>
 
         <SimpleDialog
                   selectedValue={selectedValue}
                   open={open}
                   onClose={handleClose}
                 />
-      </Box>
       <Grid container spacing={3}>
         <Grid xs={12} sm={6} md={3} item>
             <CardGrid></CardGrid>
         </Grid>
-        <Grid xs={12} sm={6} md={3} item>
-            <CardGrid></CardGrid>
-        </Grid>
-        <Grid xs={12} sm={6} md={3} item>
-            <CardGrid></CardGrid>
-        </Grid>
-        <Grid xs={12} sm={6} md={3} item>
-            <CardGrid></CardGrid>
-        </Grid>
-        <Grid xs={12} sm={6} md={3} item>
-            <CardGrid></CardGrid>
-        </Grid>
-        
       </Grid>
     </>
   );
 }
 
-export default Wallets;
+export default NetworkList;
