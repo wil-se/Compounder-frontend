@@ -1,16 +1,11 @@
 import {
   Button,
-  Card,
   Grid,
   Box,
-  CardContent,
   Typography,
   Avatar,
-  Tooltip,
-  CardActionArea
 } from '@mui/material';
 
-import { styled } from '@mui/material/styles';
 import AddTwoToneIcon from '@mui/icons-material/AddTwoTone';
 
 import CardGrid from './Card'
@@ -24,12 +19,10 @@ import Dialog from '@mui/material/Dialog';
 import AddIcon from '@mui/icons-material/Add';
 import TextField from '@mui/material/TextField';
 
-
-
-
 import PropTypes from 'prop-types';
 import { useState } from 'react';
 
+import { Network } from '../../db/models/network';
 
 
 
@@ -127,6 +120,16 @@ SimpleDialog.propTypes = {
   
 
 function NetworkList() {
+  const net: Network = new Network();
+  net.setNetwork(777, "NETT", new Array<string>(), new Array<string>());
+  // net.all().then(e => e.forEach(k => console.log(k.data())));
+  // net.create();
+  // net.getById(777).then(e => e.forEach(k => console.log(k.data())));
+  net.update(777, 999, "NEWNETT", new Array<string>(), new Array<string>());
+  console.log("#####################")
+  net.all().then(e => e.forEach(k => console.log(k.data())));
+  
+  net.delete(888);
 
   const [open, setOpen] = useState(false);
   const [selectedValue, setSelectedValue] = useState("");

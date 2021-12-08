@@ -1,24 +1,11 @@
 import { ReactNode } from 'react';
 
-import DesignServicesTwoToneIcon from '@mui/icons-material/DesignServicesTwoTone';
-import BrightnessLowTwoToneIcon from '@mui/icons-material/BrightnessLowTwoTone';
-import MmsTwoToneIcon from '@mui/icons-material/MmsTwoTone';
 import TableChartTwoToneIcon from '@mui/icons-material/TableChartTwoTone';
-import AccountCircleTwoToneIcon from '@mui/icons-material/AccountCircleTwoTone';
-import BallotTwoToneIcon from '@mui/icons-material/BallotTwoTone';
-import BeachAccessTwoToneIcon from '@mui/icons-material/BeachAccessTwoTone';
-import EmojiEventsTwoToneIcon from '@mui/icons-material/EmojiEventsTwoTone';
-import FilterVintageTwoToneIcon from '@mui/icons-material/FilterVintageTwoTone';
-import HowToVoteTwoToneIcon from '@mui/icons-material/HowToVoteTwoTone';
-import LocalPharmacyTwoToneIcon from '@mui/icons-material/LocalPharmacyTwoTone';
-import RedeemTwoToneIcon from '@mui/icons-material/RedeemTwoTone';
-import SettingsTwoToneIcon from '@mui/icons-material/SettingsTwoTone';
-import TrafficTwoToneIcon from '@mui/icons-material/TrafficTwoTone';
-import VerifiedUserTwoToneIcon from '@mui/icons-material/VerifiedUserTwoTone';
 import AccountTreeTwoToneIcon from '@mui/icons-material/AccountTreeTwoTone';
-import DocumentScannerTwoToneIcon from '@mui/icons-material/DocumentScannerTwoTone';
-import AlignVerticalCenterTwoToneIcon from '@mui/icons-material/AlignVerticalCenterTwoTone';
 import MonetizationOnTwoToneIcon from '@mui/icons-material/MonetizationOnTwoTone';
+import AgricultureTwoToneIcon from '@mui/icons-material/AgricultureTwoTone';
+import AltRouteTwoToneIcon from '@mui/icons-material/AltRouteTwoTone';
+import SmartToyTwoToneIcon from '@mui/icons-material/SmartToyTwoTone';
 
 
 export interface MenuItem {
@@ -55,17 +42,17 @@ const menuItems: MenuItems[] = [
       },
       {
         name: 'Routers',
-        icon: AlignVerticalCenterTwoToneIcon,
+        icon: AltRouteTwoToneIcon,
         link: '/routers'
       },
       {
         name: 'Farms',
-        icon: AlignVerticalCenterTwoToneIcon,
+        icon: AgricultureTwoToneIcon,
         link: '/farms'
       },
       {
         name: 'Compounders',
-        icon: AlignVerticalCenterTwoToneIcon,
+        icon: SmartToyTwoToneIcon,
         link: '/compounders'
       },
     ]

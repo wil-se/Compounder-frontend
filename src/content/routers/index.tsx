@@ -1,20 +1,19 @@
 import { Helmet } from 'react-helmet-async';
-import PageTitleWrapper from 'src/components/PageTitleWrapper';
-import { Grid, Container } from '@mui/material';
+import { Container } from '@mui/material';
 import Footer from 'src/components/Footer';
-import { Card } from '@mui/material';
-
+import RoutersList from './RoutersList';
 
 function Routers() {
   return (
     <>
       <Helmet>
-        <title>Tokens</title>
+        <title>Routers</title>
       </Helmet>
       {/* <PageTitleWrapper>
         <PageHeader />
       </PageTitleWrapper> */}
       <Container maxWidth="xl">
+        <RoutersList/>
       </Container>
       <Footer />
     </>

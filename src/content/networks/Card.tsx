@@ -1,13 +1,10 @@
 import {
-    Button,
     Card,
     Grid,
     Box,
     CardContent,
     Typography,
     Avatar,
-    Tooltip,
-    CardActionArea
   } from '@mui/material';
 
 import { styled } from '@mui/material/styles';
