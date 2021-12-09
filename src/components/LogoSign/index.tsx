@@ -73,7 +73,7 @@ const LogoSignInner = styled(Box)(
 function Logo() {
 
   return (
-    <Tooltip title="ice0x0" arrow>
+    <Tooltip title="ice0x0 x Kunnow" arrow>
       <LogoWrapper to="/overview">
         <LogoSignWrapper>
           <LogoSign>

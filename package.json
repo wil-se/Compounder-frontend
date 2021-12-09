@@ -1,10 +1,10 @@
 {
-  "name": "ice0x0-starter-full",
+  "name": "starter-full",
   "version": "0.0.1",
-  "title": "ice0x0-starter-full",
+  "title": "starter-full",
   "description": "starter with elements",
   "author": {
-    "name": "ice0x0 :-)"
+    "name": "ice0x0 x Kunnow"
   },
   "private": true,
   "dependencies": {
