@@ -19,6 +19,7 @@ export class Network {
     wss: Array<string>;
     rpc: Array<string>;
     knownAddresses: Map<string, string>;
+    logoUrl: string;
 
     public constructor() {
         this.id = -1;
@@ -26,13 +27,15 @@ export class Network {
         this.wss = new Array<string>();
         this.rpc = new Array<string>();
         this.knownAddresses = new Map<string, string>();
+        this.logoUrl = "";
     }
 
-    public setNetwork(id: number, name: string, wss: Array<string>, rpc: Array<string>): void {
+    public setNetwork(id: number, name: string, wss: Array<string>, rpc: Array<string>, logoUrl: string): void {
         this.id = id;
         this.name = name.toLowerCase();
         this.wss = wss;
         this.rpc = rpc;
+        this.logoUrl = logoUrl;
     }
 
     public async create(): Promise<any> {
@@ -43,7 +46,8 @@ export class Network {
                     networkID: this.id, 
                     name: this.name,
                     wss: this.wss,
-                    rpc: this.rpc
+                    rpc: this.rpc,
+                    logoUrl: this.logoUrl,
                 });
     }
 
@@ -55,7 +59,7 @@ export class Network {
         return await getDocs(query(collection(db, "network"), where("networkID", "==", nid)));
     }
 
-    public async update(id: number, newId: number, name: string, wss: Array<string>, rpc: Array<string>) {
+    public async update(id: number, newId: number, name: string, wss: Array<string>, rpc: Array<string>, logoUrl: string) {
         var nets = await this.getById(id);
         var nnets = await this.getById(newId);
         if(nets.docs.length !== 1 && nnets.docs.length !== 0)
@@ -64,6 +68,7 @@ export class Network {
                 name: name.toLowerCase(),
                 wss: wss,
                 rpc: rpc,
+                logoUrl: logoUrl,
             });
     }
 
@@ -71,5 +76,5 @@ export class Network {
         var nets = await this.getById(id);
         if(nets.docs[0] !== undefined)
             await deleteDoc(nets.docs[0].ref)
-    }    
+    }
 }

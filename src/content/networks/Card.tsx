@@ -19,7 +19,15 @@ const AvatarWrapper = styled(Avatar)(
 `
 );
 
-function CardGrid(){
+function CardNetwork({name, networkId, logoUrl}) {
+  if(name === "")
+    name = "NO_NAME"
+  if(networkId === "")
+    networkId = "NO_NET_ID"
+  if(logoUrl === "")
+    logoUrl = "https://cdn.jsdelivr.net/gh/atomiclabs/cryptocurrency-icons@d5c68edec1f5eaec59ac77ff2b48144679cebca1/svg/black/generic.svg"
+  
+  
     return (
         <Card sx={{ px: 1 }}>
             <CardContent>
@@ -37,8 +45,8 @@ function CardGrid(){
             <Grid item xs={12} display="flex" justifyContent="center" alignItems="center">
             <AvatarWrapper>
                 <img
-                  alt="BTC"
-                  src="/static/images/placeholders/logo/ethereum.png"
+                  alt={name}
+                  src={logoUrl}
                 />
               </AvatarWrapper>
 
@@ -46,12 +54,12 @@ function CardGrid(){
 
   <Grid item xs={12} display="flex" justifyContent="center" alignItems="center">
   <Typography variant="h5" noWrap>
-                Ethereum
+                {name}
               </Typography>
   </Grid>
   <Grid item xs={12} display="flex" justifyContent="center" alignItems="center">
   <Typography variant="subtitle1" noWrap>
-                ETH
+                {networkId}
               </Typography>
 
   </Grid>
@@ -68,4 +76,4 @@ function CardGrid(){
     )
 }
 
-export default CardGrid
+export default CardNetwork

@@ -8,7 +8,7 @@ import {
 
 import AddTwoToneIcon from '@mui/icons-material/AddTwoTone';
 
-import CardGrid from './Card'
+import CardNetwork from './Card'
 
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
@@ -23,17 +23,42 @@ import PropTypes from 'prop-types';
 import { useState } from 'react';
 
 import { Network } from '../../db/models/network';
+import {useQuery} from 'react-query'
 
 
 
 function SimpleDialog(props) {
   const { onClose, selectedValue, open } = props;
+  const [selectedValueName, setSelectedValueName] = useState("");
+  const [selectedValueId, setSelectedValueId] = useState(0);
+  const [selectedValueWss, setSelectedValueWss] = useState("");
+  const [selectedValueRpc, setSelectedValueRpc] = useState("");
+  const [selectedValueLogo, setSelectedValueLogo] = useState("");
 
+
+
+  const handleSelectName = (val) => {
+    setSelectedValueName(val.target.value);
+  };
+  const handleSelectId = (val) => {
+    setSelectedValueId(val.target.value);
+  };
+  const handleSelectWss = (val) => {
+    setSelectedValueWss(val.target.value);
+  };
+  const handleSelectRpc = (val) => {
+    setSelectedValueRpc(val.target.value);
+  };
+  const handleSelectLogo = (val) => {
+    setSelectedValueLogo(val.target.value);
+  };
   const handleClose = () => {
     onClose(selectedValue);
   };
-
   const handleListItemClick = (value) => {
+    var net = new Network();
+    net.setNetwork(Number(selectedValueId), selectedValueName, selectedValueWss.split(";"), selectedValueRpc.split(";"), selectedValueLogo);
+    net.create();
     onClose(value);
   };
 
@@ -47,6 +72,7 @@ function SimpleDialog(props) {
           label="Name"
           defaultValue=""
           helperText=""
+          onChange={handleSelectName}
         />
       </ListItem>
 
@@ -57,53 +83,53 @@ function SimpleDialog(props) {
           label="ID"
           defaultValue=""
           helperText=""
-        />
-      </ListItem>
-      
-      <ListItem>
-      <Typography variant="body2" noWrap>
-                 write WSS and RPC list like:
-              </Typography>
-      </ListItem>
-
-
-      <ListItem>
-      <Typography variant="body1" noWrap>
-                link;link;link;
-              </Typography>
-      </ListItem>
-
-
-      <ListItem>
-      
-      <TextField
-          id="filled-multiline-flexible"
-          label="WSS"
-          multiline
-          maxRows={128}
-          variant="outlined"
+          onChange={handleSelectId}
         />
       </ListItem>
 
       <ListItem>
         <TextField
           id="outlined-helperText"
-          label="RPC"
+          label="LOGO URL"
+          defaultValue=""
+          helperText=""
+          onChange={handleSelectLogo}
+        />
+      </ListItem>
+
+      <ListItem>
+      
+      <TextField
+          id="filled-multiline-flexible"
+          label="WSS;WSS;WSS;"
+          multiline
+          maxRows={128}
+          variant="outlined"
+          onChange={handleSelectWss}
+        />
+      </ListItem>
+
+      <ListItem>
+        <TextField
+          id="outlined-helperText"
+          label="RPC;RPC;RPC;"
           multiline
           maxRows={128}
           defaultValue=""
           helperText=""
+          onChange={handleSelectRpc}
         />
       </ListItem>
 
-        <ListItem autoFocus button onClick={() => handleListItemClick('addAccount')}>
-          <ListItemAvatar>
-            <Avatar>
+
+
+
+      <ListItem autoFocus button onClick={() => handleListItemClick('addAccount')}>
+
               <AddIcon />
-            </Avatar>
-          </ListItemAvatar>
           <ListItemText primary="Add network" />
         </ListItem>
+
       
       </List>
     </Dialog>
@@ -117,31 +143,22 @@ SimpleDialog.propTypes = {
 };
 
 
-  
 
 function NetworkList() {
-  const net: Network = new Network();
-  net.setNetwork(777, "NETT", new Array<string>(), new Array<string>());
-  // net.all().then(e => e.forEach(k => console.log(k.data())));
-  // net.create();
-  // net.getById(777).then(e => e.forEach(k => console.log(k.data())));
-  net.update(777, 999, "NEWNETT", new Array<string>(), new Array<string>());
-  console.log("#####################")
-  net.all().then(e => e.forEach(k => console.log(k.data())));
-  
-  net.delete(888);
-
   const [open, setOpen] = useState(false);
   const [selectedValue, setSelectedValue] = useState("");
-
+  const [networkList, setNetworkList] = useState([]);
+  
   const handleClickOpen = () => {
     setOpen(true);
   };
-
   const handleClose = (value) => {
     setOpen(false);
     setSelectedValue(value);
   };
+
+  new Network().all().then(e => e.docs.map((v, k) => <Grid key={k} xs={12} sm={6} md={3} item><CardNetwork key={k} name={v.data().name} networkId={v.data().networkID} logoUrl={v.data().logoUrl} ></CardNetwork></Grid>)).then(a => setNetworkList(a));
+
 
 
   return (
@@ -169,9 +186,9 @@ function NetworkList() {
                   onClose={handleClose}
                 />
       <Grid container spacing={3}>
-        <Grid xs={12} sm={6} md={3} item>
-            <CardGrid></CardGrid>
-        </Grid>
+        
+          {networkList}
+        
       </Grid>
     </>
   );
