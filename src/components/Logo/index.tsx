@@ -112,7 +112,7 @@ function Logo() {
           <Tooltip title="Version 0.1.0" arrow placement="right">
             <VersionBadge>0.1</VersionBadge>
           </Tooltip>
-          <LogoText>Starter</LogoText>
+          <LogoText>Compounder</LogoText>
         </LogoTextWrapper>
       </Hidden>
     </LogoWrapper>

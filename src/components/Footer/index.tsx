@@ -21,11 +21,11 @@ function Footer() {
         >
           <Box>
             <Typography variant="subtitle1">
-              &copy; 2021 - ice0x0 x Kunnow
+              {/* &copy; 2021 - ice0x0 x Kunnow */}
             </Typography>
           </Box>
           <Typography sx={{ pt: { xs: 2, md: 0 } }} variant="subtitle1">
-            Crafted by <Link href="" target="_blank" rel="noopener noreferrer">ice0x0 x Kunnow</Link>
+            {/* Crafted by <Link href="" target="_blank" rel="noopener noreferrer">ice0x0 x Kunnow</Link> */}
           </Typography>
         </Box>
       </Container>
