@@ -7,141 +7,12 @@ import {
 } from '@mui/material';
 
 import AddTwoToneIcon from '@mui/icons-material/AddTwoTone';
-
 import CardNetwork from './Card'
-
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemAvatar from '@mui/material/ListItemAvatar';
-import ListItemText from '@mui/material/ListItemText';
-import DialogTitle from '@mui/material/DialogTitle';
-import Dialog from '@mui/material/Dialog';
-import AddIcon from '@mui/icons-material/Add';
-import TextField from '@mui/material/TextField';
-
 import PropTypes from 'prop-types';
 import { useState } from 'react';
-
 import { Network } from '../../db/models/network';
-import {useQuery} from 'react-query'
 
-
-
-function SimpleDialog(props) {
-  const { onClose, selectedValue, open } = props;
-  const [selectedValueName, setSelectedValueName] = useState("");
-  const [selectedValueId, setSelectedValueId] = useState(0);
-  const [selectedValueWss, setSelectedValueWss] = useState("");
-  const [selectedValueRpc, setSelectedValueRpc] = useState("");
-  const [selectedValueLogo, setSelectedValueLogo] = useState("");
-
-
-
-  const handleSelectName = (val) => {
-    setSelectedValueName(val.target.value);
-  };
-  const handleSelectId = (val) => {
-    setSelectedValueId(val.target.value);
-  };
-  const handleSelectWss = (val) => {
-    setSelectedValueWss(val.target.value);
-  };
-  const handleSelectRpc = (val) => {
-    setSelectedValueRpc(val.target.value);
-  };
-  const handleSelectLogo = (val) => {
-    setSelectedValueLogo(val.target.value);
-  };
-  const handleClose = () => {
-    onClose(selectedValue);
-  };
-  const handleListItemClick = (value) => {
-    var net = new Network();
-    net.setNetwork(Number(selectedValueId), selectedValueName, selectedValueWss.split(";"), selectedValueRpc.split(";"), selectedValueLogo);
-    net.create();
-    onClose(value);
-  };
-
-  return (
-    <Dialog onClose={handleClose} open={open}>
-      <DialogTitle>Set up network</DialogTitle>
-      <List sx={{ pt: 0 }}>
-      <ListItem>
-        <TextField
-          id="outlined-helperText"
-          label="Name"
-          defaultValue=""
-          helperText=""
-          onChange={handleSelectName}
-        />
-      </ListItem>
-
-      <ListItem>
-      
-        <TextField
-          id="outlined-helperText"
-          label="ID"
-          defaultValue=""
-          helperText=""
-          onChange={handleSelectId}
-        />
-      </ListItem>
-
-      <ListItem>
-        <TextField
-          id="outlined-helperText"
-          label="LOGO URL"
-          defaultValue=""
-          helperText=""
-          onChange={handleSelectLogo}
-        />
-      </ListItem>
-
-      <ListItem>
-      
-      <TextField
-          id="filled-multiline-flexible"
-          label="WSS;WSS;WSS;"
-          multiline
-          maxRows={128}
-          variant="outlined"
-          onChange={handleSelectWss}
-        />
-      </ListItem>
-
-      <ListItem>
-        <TextField
-          id="outlined-helperText"
-          label="RPC;RPC;RPC;"
-          multiline
-          maxRows={128}
-          defaultValue=""
-          helperText=""
-          onChange={handleSelectRpc}
-        />
-      </ListItem>
-
-
-
-
-      <ListItem autoFocus button onClick={() => handleListItemClick('addAccount')}>
-
-              <AddIcon />
-          <ListItemText primary="Add network" />
-        </ListItem>
-
-      
-      </List>
-    </Dialog>
-  );
-}
-
-SimpleDialog.propTypes = {
-  onClose: PropTypes.func.isRequired,
-  open: PropTypes.bool.isRequired,
-  selectedValue: PropTypes.string.isRequired,
-};
-
+import { NetworkModal } from './Modal'
 
 
 function NetworkList() {
@@ -159,8 +30,6 @@ function NetworkList() {
 
   new Network().all().then(e => e.docs.map((v, k) => <Grid key={k} xs={12} sm={6} md={3} item><CardNetwork key={k} name={v.data().name} networkId={v.data().networkID} logoUrl={v.data().logoUrl} ></CardNetwork></Grid>)).then(a => setNetworkList(a));
 
-
-
   return (
     <>
       <Box
@@ -176,17 +45,19 @@ function NetworkList() {
           onClick={handleClickOpen}
         >
 
-          Add new network
+          Add network
         </Button>
         </Box>
 
-        <SimpleDialog
+        <NetworkModal
                   selectedValue={selectedValue}
                   open={open}
                   onClose={handleClose}
+                  title="Add network"
+                  buttonText="Add"
                 />
       <Grid container spacing={3}>
-        
+      <Grid key={9999} xs={12} sm={6} md={3} item><CardNetwork key={88888} name={"Cronos"} networkId={25} logoUrl={"https://cdn.jsdelivr.net/gh/atomiclabs/cryptocurrency-icons@d5c68edec1f5eaec59ac77ff2b48144679cebca1/svg/black/generic.svg"} ></CardNetwork></Grid>
           {networkList}
         
       </Grid>

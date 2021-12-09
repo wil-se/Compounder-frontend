@@ -1,0 +1,147 @@
+import { useState } from 'react';
+import { Network } from '../../db/models/network';
+import Dialog from '@mui/material/Dialog';
+import DialogTitle from '@mui/material/DialogTitle';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemText from '@mui/material/ListItemText';
+import AddIcon from '@mui/icons-material/Add';
+import RemoveTwoToneIcon from '@mui/icons-material/RemoveTwoTone';
+import TextField from '@mui/material/TextField';
+
+
+export function NetworkModal(props) {
+    let {
+        onClose,
+        selectedValue,
+        open,
+        title,
+        buttonText,
+        networkId,
+        name,
+        wss,
+        rpc,
+        logoUrl,
+        del
+    } = props;
+
+    if (wss === undefined)
+        wss = new Array<string>()
+    if (rpc === undefined)
+        rpc = new Array<string>()
+    
+
+    const [selectedValueName, setSelectedValueName] = useState("");
+    const [selectedValueId, setSelectedValueId] = useState(0);
+    const [selectedValueWss, setSelectedValueWss] = useState("");
+    const [selectedValueRpc, setSelectedValueRpc] = useState("");
+    const [selectedValueLogo, setSelectedValueLogo] = useState("");
+  
+    const handleSelectName = (val) => {
+      setSelectedValueName(val.target.value);
+    };
+    const handleSelectId = (val) => {
+      setSelectedValueId(val.target.value);
+    };
+    const handleSelectWss = (val) => {
+      setSelectedValueWss(val.target.value);
+    };
+    const handleSelectRpc = (val) => {
+      setSelectedValueRpc(val.target.value);
+    };
+    const handleSelectLogo = (val) => {
+      setSelectedValueLogo(val.target.value);
+    };
+    const handleClose = () => {
+      onClose(selectedValue);
+    };
+    const handleListItemClick = (value) => {
+      var net = new Network();
+      net.update(Number(networkId), Number(selectedValueId), selectedValueName, selectedValueWss.split(";"), selectedValueRpc.split(";"), selectedValueLogo);
+      onClose(value);
+    };
+
+    const handleDelete = (value) => {
+        var net = new Network();
+        net.delete(value);
+        onClose(value);
+      };
+  
+      
+    return (
+      <Dialog onClose={handleClose} open={open}>
+        <DialogTitle>{title}</DialogTitle>
+        <List sx={{ pt: 0 }}>
+            <ListItem>
+              <TextField
+                id="outlined-helperText"
+                label="Name"
+                defaultValue={name}
+                helperText=""
+                onChange={handleSelectName}
+              />
+            </ListItem>
+  
+            <ListItem>
+              <TextField
+                id="outlined-helperText"
+                label="ID"
+                defaultValue={networkId}
+                helperText=""
+                onChange={handleSelectId}
+              />
+            </ListItem>
+  
+            <ListItem>
+              <TextField
+                id="outlined-helperText"
+                label="LOGO URL"
+                defaultValue={logoUrl}
+                helperText=""
+                onChange={handleSelectLogo}
+              />
+            </ListItem>
+  
+            <ListItem>
+            <TextField
+                id="filled-multiline-flexible"
+                label="WSS;WSS;WSS;"
+                multiline
+                maxRows={128}
+                variant="outlined"
+                defaultValue={wss.join(";")}
+                onChange={handleSelectWss}
+              />
+            </ListItem>
+  
+            <ListItem>
+              <TextField
+                id="outlined-helperText"
+                label="RPC;RPC;RPC;"
+                multiline
+                maxRows={128}
+                defaultValue={rpc.join(";")}
+                helperText=""
+                onChange={handleSelectRpc}
+              />
+            </ListItem>
+  
+            <ListItem autoFocus button onClick={() => handleListItemClick('')}>
+                <AddIcon /> <ListItemText primary={buttonText} />
+            </ListItem>
+        
+            
+            {(() => {
+                if(del === true) {
+                    return (
+                        <ListItem autoFocus button onClick={() => handleDelete(networkId)}>
+                <RemoveTwoToneIcon /> <ListItemText primary={"Delete"} />
+            </ListItem>
+                    )
+                }
+            })()}
+        </List>
+      </Dialog>
+    );
+  }
+  
