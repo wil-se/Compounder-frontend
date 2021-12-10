@@ -10,10 +10,10 @@ import { Token } from '../../db/models/token';
 import { AddTokenModal } from './AddTokenModal'
 
 
-function NetworkList() {
+export function TokenList() {
   const [open, setOpen] = useState(false);
   const [selectedValue, setSelectedValue] = useState("");
-  const [networkList, setNetworkList] = useState([]);
+  const [tokenList, setTokenList] = useState([]);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -46,15 +46,12 @@ function NetworkList() {
         </Button>
       </Box>
         <AddTokenModal
-          selectedValue={selectedValue}
           open={open}
           onClose={handleClose}
         />
       <Grid container spacing={3}>
-        {networkList} 
+        {tokenList} 
       </Grid>
     </>
   );
 }
-
-export default NetworkList;

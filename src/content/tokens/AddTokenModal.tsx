@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Network } from '../../db/models/network';
 import Dialog from '@mui/material/Dialog';
 import DialogTitle from '@mui/material/DialogTitle';
@@ -7,50 +7,52 @@ import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import AddIcon from '@mui/icons-material/Add';
 import TextField from '@mui/material/TextField';
+import Select from '@mui/material/Select';
+import MenuItem from '@mui/material/MenuItem';
+import InputLabel from '@mui/material/InputLabel';
+import FormControl from '@mui/material/FormControl';
 
 
 export function AddTokenModal(props) {
     let {
         onClose,
-        selectedValue,
         open,
     } = props;
 
     const [selectedValueName, setSelectedValueName] = useState("");
-    const [selectedValueId, setSelectedValueId] = useState(0);
-    const [selectedValueWss, setSelectedValueWss] = useState("");
-    const [selectedValueRpc, setSelectedValueRpc] = useState("");
-    const [selectedValueLogo, setSelectedValueLogo] = useState("");
-  
+    const [networkList, setNetworkList] = useState([]);
+    const [selectedNetwork, setSelectedNetwork] = useState("");
+    const [selectedAddress, setSelectedAddress] = useState("");
+    const [selectedLogo, setSelectedLogo] = useState("");
+
+
     const handleSelectName = (val) => {
       setSelectedValueName(val.target.value);
     };
-    const handleSelectId = (val) => {
-      setSelectedValueId(val.target.value);
-    };
-    const handleSelectWss = (val) => {
-      setSelectedValueWss(val.target.value);
-    };
-    const handleSelectRpc = (val) => {
-      setSelectedValueRpc(val.target.value);
-    };
-    const handleSelectLogo = (val) => {
-      setSelectedValueLogo(val.target.value);
-    };
     const handleClose = () => {
-      onClose(selectedValue);
+      onClose();
     };
-
     const handleListItemClick = (value) => {
-      var net = new Network();
-      net.setNetwork(Number(selectedValueId), selectedValueName, selectedValueWss.split(";"), selectedValueRpc.split(";"), selectedValueLogo);
-      net.create()  
       onClose(value);
     };
+    const handleNetworkChange = (event) => {
+      setSelectedNetwork(event.target.value);
+    };
+    const handleSelectAddress = (event) => {
+      setSelectedAddress(event.target.value);
+    };
+    const handleSelectLogo = (event) => {
+      setSelectedLogo(event.target.value);
+    };
+
+
+    useEffect(() => {
+      new Network().all().then(e => e.docs.map((v, k) => <MenuItem key={k} value={v.data().name}>{v.data().name}</MenuItem>)).then((a) => {setNetworkList(a);});
+    }, []);
   
     return (
       <Dialog onClose={handleClose} open={open}>
-        <DialogTitle>Add</DialogTitle>
+        <DialogTitle>Add token</DialogTitle>
         <List sx={{ pt: 0 }}>
             <ListItem>
               <TextField
@@ -58,51 +60,49 @@ export function AddTokenModal(props) {
                 label="Name"
                 helperText=""
                 onChange={handleSelectName}
+                fullWidth
               />
             </ListItem>
-  
+
             <ListItem>
               <TextField
                 id="outlined-helperText"
-                label="ID"
+                label="Address"
                 helperText=""
-                onChange={handleSelectId}
+                onChange={handleSelectAddress}
+                fullWidth
               />
             </ListItem>
-  
+
+            <ListItem>
+            <FormControl fullWidth>
+              <InputLabel id="demo-simple-select-helper-label">Network</InputLabel>
+              <Select
+                labelId="demo-simple-select-helper-label"
+                id="demo-simple-select-helper"
+                value={selectedNetwork}
+                label="Network"
+                onChange={handleNetworkChange}
+              >
+              {networkList}
+              </Select>
+            {/* <FormHelperText>With label + helper text</FormHelperText> */}
+            </FormControl>
+            </ListItem>
+
+
             <ListItem>
               <TextField
                 id="outlined-helperText"
-                label="LOGO URL"
+                label="Logo"
                 helperText=""
                 onChange={handleSelectLogo}
+                fullWidth
               />
             </ListItem>
-  
-            <ListItem>
-            <TextField
-                id="filled-multiline-flexible"
-                label="WSS;WSS;WSS;"
-                multiline
-                maxRows={128}
-                variant="outlined"
-                onChange={handleSelectWss}
-              />
-            </ListItem>
-  
-            <ListItem>
-              <TextField
-                id="outlined-helperText"
-                label="RPC;RPC;RPC;"
-                multiline
-                maxRows={128}
-                helperText=""
-                onChange={handleSelectRpc}
-              />
-            </ListItem>
-  
+
             <ListItem autoFocus button onClick={() => handleListItemClick('')}>
-                <AddIcon /> <ListItemText primary={"Add"} />
+                <AddIcon /> <ListItemText primary={"Add token"} />
             </ListItem>
 
         </List>

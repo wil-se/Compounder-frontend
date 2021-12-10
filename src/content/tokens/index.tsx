@@ -1,7 +1,7 @@
 import { Helmet } from 'react-helmet-async';
 import {  Container } from '@mui/material';
 import Footer from 'src/components/Footer';
-import TokenList from './TokenList';
+import { TokenList } from './TokenList';
 
 
 function Tokens() {

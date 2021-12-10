@@ -12,7 +12,6 @@ import TextField from '@mui/material/TextField';
 export function AddNetworkModal(props) {
     let {
         onClose,
-        selectedValue,
         open,
     } = props;
 
@@ -38,7 +37,7 @@ export function AddNetworkModal(props) {
       setSelectedValueLogo(val.target.value);
     };
     const handleClose = () => {
-      onClose(selectedValue);
+      onClose();
     };
 
     const handleListItemClick = (value) => {
