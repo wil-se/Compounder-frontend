@@ -21,7 +21,7 @@ const AvatarWrapper = styled(Avatar)(
 `
 );
 
-function CardNetwork({name, networkId, logoUrl, wss, rpc, onClose}) {
+export function CardNetwork({name, networkId, logoUrl, wss, rpc, onClose}) {
   if(name === "")
     name = "NO_NAME"
   if(networkId === "")
@@ -29,18 +29,16 @@ function CardNetwork({name, networkId, logoUrl, wss, rpc, onClose}) {
   if(logoUrl === "")
     logoUrl = "https://cdn.jsdelivr.net/gh/atomiclabs/cryptocurrency-icons@d5c68edec1f5eaec59ac77ff2b48144679cebca1/svg/black/generic.svg"
   
-
-  const handleClose = () => {
+    const [open, setOpen] = useState(false);
+    
+    const handleClose = () => {
     onClose()
     setOpen(false);
   };
-
   const handleOpen = () => {
     setOpen(true);
   };
   
-  const [open, setOpen] = useState(false);
-
     return (
       <div>
      <div style={{ cursor: 'pointer' }} onClick={handleOpen}> 
@@ -73,5 +71,3 @@ function CardNetwork({name, networkId, logoUrl, wss, rpc, onClose}) {
       </div>
     )
 }
-
-export default CardNetwork

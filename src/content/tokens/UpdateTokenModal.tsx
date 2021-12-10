@@ -6,22 +6,27 @@ import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import AddIcon from '@mui/icons-material/Add';
+import RemoveTwoToneIcon from '@mui/icons-material/RemoveTwoTone';
 import TextField from '@mui/material/TextField';
 
 
-export function AddNetworkModal(props) {
+export function UpdateTokenModal(props) {
     let {
         onClose,
-        selectedValue,
         open,
+        networkId,
+        name,
+        wss,
+        rpc,
+        logoUrl
     } = props;
 
-    const [selectedValueName, setSelectedValueName] = useState("");
-    const [selectedValueId, setSelectedValueId] = useState(0);
-    const [selectedValueWss, setSelectedValueWss] = useState("");
-    const [selectedValueRpc, setSelectedValueRpc] = useState("");
-    const [selectedValueLogo, setSelectedValueLogo] = useState("");
-  
+    const [selectedValueName, setSelectedValueName] = useState(name);
+    const [selectedValueId, setSelectedValueId] = useState(networkId);
+    const [selectedValueWss, setSelectedValueWss] = useState(wss);
+    const [selectedValueRpc, setSelectedValueRpc] = useState(rpc);
+    const [selectedValueLogo, setSelectedValueLogo] = useState(logoUrl);
+
     const handleSelectName = (val) => {
       setSelectedValueName(val.target.value);
     };
@@ -37,25 +42,27 @@ export function AddNetworkModal(props) {
     const handleSelectLogo = (val) => {
       setSelectedValueLogo(val.target.value);
     };
-    const handleClose = () => {
-      onClose(selectedValue);
+    const handleListItemClick = () => {
+      var net = new Network();
+      console.log(selectedValueWss);
+      net.update(Number(networkId), Number(selectedValueId), selectedValueName, selectedValueWss.split(";"), selectedValueRpc.split(";"), selectedValueLogo);
+      onClose();
+    };
+    const handleDelete = (value) => {
+      var net = new Network();
+      net.delete(value);
+      onClose();
     };
 
-    const handleListItemClick = (value) => {
-      var net = new Network();
-      net.setNetwork(Number(selectedValueId), selectedValueName, selectedValueWss.split(";"), selectedValueRpc.split(";"), selectedValueLogo);
-      net.create()  
-      onClose(value);
-    };
-  
     return (
-      <Dialog onClose={handleClose} open={open}>
-        <DialogTitle>Add</DialogTitle>
+      <Dialog onClose={onClose} open={open}>
+        <DialogTitle>Update network</DialogTitle>
         <List sx={{ pt: 0 }}>
             <ListItem>
               <TextField
                 id="outlined-helperText"
                 label="Name"
+                defaultValue={name}
                 helperText=""
                 onChange={handleSelectName}
               />
@@ -65,6 +72,7 @@ export function AddNetworkModal(props) {
               <TextField
                 id="outlined-helperText"
                 label="ID"
+                defaultValue={networkId}
                 helperText=""
                 onChange={handleSelectId}
               />
@@ -74,6 +82,7 @@ export function AddNetworkModal(props) {
               <TextField
                 id="outlined-helperText"
                 label="LOGO URL"
+                defaultValue={logoUrl}
                 helperText=""
                 onChange={handleSelectLogo}
               />
@@ -86,6 +95,7 @@ export function AddNetworkModal(props) {
                 multiline
                 maxRows={128}
                 variant="outlined"
+                defaultValue={wss}
                 onChange={handleSelectWss}
               />
             </ListItem>
@@ -96,17 +106,21 @@ export function AddNetworkModal(props) {
                 label="RPC;RPC;RPC;"
                 multiline
                 maxRows={128}
+                defaultValue={rpc}
                 helperText=""
                 onChange={handleSelectRpc}
               />
             </ListItem>
   
-            <ListItem autoFocus button onClick={() => handleListItemClick('')}>
-                <AddIcon /> <ListItemText primary={"Add"} />
+            <ListItem autoFocus button onClick={() => handleListItemClick()}>
+                <AddIcon /> <ListItemText primary={"Update network"} />
             </ListItem>
-
+        
+            <ListItem autoFocus button onClick={() => handleDelete(networkId)}>
+                <RemoveTwoToneIcon /> <ListItemText primary={"Delete"} />
+            </ListItem>
+                 
         </List>
       </Dialog>
     );
   }
-  

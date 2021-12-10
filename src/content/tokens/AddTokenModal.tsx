@@ -9,7 +9,7 @@ import AddIcon from '@mui/icons-material/Add';
 import TextField from '@mui/material/TextField';
 
 
-export function AddNetworkModal(props) {
+export function AddTokenModal(props) {
     let {
         onClose,
         selectedValue,

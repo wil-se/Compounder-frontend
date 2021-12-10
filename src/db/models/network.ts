@@ -12,7 +12,6 @@ import {
   } from "firebase/firestore";
 
 
-
 export class Network {
     id: number;
     name: string;
