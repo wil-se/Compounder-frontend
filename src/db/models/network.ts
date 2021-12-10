@@ -32,7 +32,7 @@ export class Network {
 
     public setNetwork(id: number, name: string, wss: Array<string>, rpc: Array<string>, logoUrl: string): void {
         this.id = id;
-        this.name = name.toLowerCase();
+        this.name = name.toUpperCase();
         this.wss = wss;
         this.rpc = rpc;
         this.logoUrl = logoUrl;
@@ -44,7 +44,7 @@ export class Network {
             if(nets.docs.length === 0)
                 return await addDoc(await collection(db, "network"), { 
                     networkID: this.id, 
-                    name: this.name,
+                    name: this.name.toUpperCase(),
                     wss: this.wss,
                     rpc: this.rpc,
                     logoUrl: this.logoUrl,
@@ -61,15 +61,18 @@ export class Network {
 
     public async update(id: number, newId: number, name: string, wss: Array<string>, rpc: Array<string>, logoUrl: string) {
         var nets = await this.getById(id);
-        var nnets = await this.getById(newId);
-        if(nets.docs.length !== 1 && nnets.docs.length !== 0)
+        
+        if(nets.docs !== undefined){
+            console.log("updating..")
             await updateDoc(nets.docs[0].ref, {
                 networkID: newId,
-                name: name.toLowerCase(),
+                name: name.toUpperCase(),
                 wss: wss,
                 rpc: rpc,
                 logoUrl: logoUrl,
             });
+        }
+            
     }
 
     public async delete(id: number) {

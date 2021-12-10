@@ -9,7 +9,7 @@ import {
 
 import { styled } from '@mui/material/styles';
 import { useState } from 'react';
-import { NetworkModal } from './Modal';
+import { UpdateNetworkModal } from './UpdateNetworkModal';
 
 
 const AvatarWrapper = styled(Avatar)(
@@ -21,7 +21,7 @@ const AvatarWrapper = styled(Avatar)(
 `
 );
 
-function CardNetwork({name, networkId, logoUrl}) {
+function CardNetwork({name, networkId, logoUrl, wss, rpc, onClose}) {
   if(name === "")
     name = "NO_NAME"
   if(networkId === "")
@@ -30,22 +30,20 @@ function CardNetwork({name, networkId, logoUrl}) {
     logoUrl = "https://cdn.jsdelivr.net/gh/atomiclabs/cryptocurrency-icons@d5c68edec1f5eaec59ac77ff2b48144679cebca1/svg/black/generic.svg"
   
 
-  const handleClose = (value) => {
+  const handleClose = () => {
+    onClose()
     setOpen(false);
-    setSelectedValue(value);
   };
 
-  const handleClickOpen = () => {
+  const handleOpen = () => {
     setOpen(true);
   };
   
   const [open, setOpen] = useState(false);
-  const [selectedValue, setSelectedValue] = useState("");
 
-  
     return (
       <div>
-     <div style={{ cursor: 'pointer' }} onClick={handleClickOpen}> 
+     <div style={{ cursor: 'pointer' }} onClick={handleOpen}> 
         <Card sx={{ px: 1 }}>
           <CardContent>
           <Box display="flex" justifyContent="center" alignItems="center"></Box>
@@ -70,19 +68,7 @@ function CardNetwork({name, networkId, logoUrl}) {
         </Card>
       </div>
       <div>
-      <NetworkModal
-                  selectedValue={selectedValue}
-                  open={open}
-                  onClose={handleClose}
-                  title="Update network"
-                  buttonText="Update"
-                  name={name}
-                  networkId={networkId}
-                  wss={["abcdde","saf34gthgfe","324t56y453t4q"]}
-                  rpc={["456hgfdebtbvc", "ergth64wgrtsf", "45hwgea"]}
-                  logoUrl={logoUrl}
-                  del={true}
-                />
+      <UpdateNetworkModal open={open} onClose={handleClose} networkId={networkId} name={name} wss={wss} rpc={rpc} logoUrl={logoUrl} />
       </div>
       </div>
     )

@@ -6,31 +6,17 @@ import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import AddIcon from '@mui/icons-material/Add';
-import RemoveTwoToneIcon from '@mui/icons-material/RemoveTwoTone';
 import TextField from '@mui/material/TextField';
 
 
-export function NetworkModal(props) {
+export function AddNetworkModal(props) {
     let {
         onClose,
         selectedValue,
         open,
-        title,
-        buttonText,
-        networkId,
-        name,
-        wss,
-        rpc,
-        logoUrl,
-        del
     } = props;
 
-    if (wss === undefined)
-        wss = new Array<string>()
-    if (rpc === undefined)
-        rpc = new Array<string>()
-    
-
+  
     const [selectedValueName, setSelectedValueName] = useState("");
     const [selectedValueId, setSelectedValueId] = useState(0);
     const [selectedValueWss, setSelectedValueWss] = useState("");
@@ -55,28 +41,23 @@ export function NetworkModal(props) {
     const handleClose = () => {
       onClose(selectedValue);
     };
+
     const handleListItemClick = (value) => {
       var net = new Network();
-      net.update(Number(networkId), Number(selectedValueId), selectedValueName, selectedValueWss.split(";"), selectedValueRpc.split(";"), selectedValueLogo);
+      net.setNetwork(Number(selectedValueId), selectedValueName, selectedValueWss.split(";"), selectedValueRpc.split(";"), selectedValueLogo);
+      net.create()  
       onClose(value);
     };
-
-    const handleDelete = (value) => {
-        var net = new Network();
-        net.delete(value);
-        onClose(value);
-      };
   
       
     return (
       <Dialog onClose={handleClose} open={open}>
-        <DialogTitle>{title}</DialogTitle>
+        <DialogTitle>Add</DialogTitle>
         <List sx={{ pt: 0 }}>
             <ListItem>
               <TextField
                 id="outlined-helperText"
                 label="Name"
-                defaultValue={name}
                 helperText=""
                 onChange={handleSelectName}
               />
@@ -86,7 +67,6 @@ export function NetworkModal(props) {
               <TextField
                 id="outlined-helperText"
                 label="ID"
-                defaultValue={networkId}
                 helperText=""
                 onChange={handleSelectId}
               />
@@ -96,7 +76,6 @@ export function NetworkModal(props) {
               <TextField
                 id="outlined-helperText"
                 label="LOGO URL"
-                defaultValue={logoUrl}
                 helperText=""
                 onChange={handleSelectLogo}
               />
@@ -109,7 +88,6 @@ export function NetworkModal(props) {
                 multiline
                 maxRows={128}
                 variant="outlined"
-                defaultValue={wss.join(";")}
                 onChange={handleSelectWss}
               />
             </ListItem>
@@ -120,26 +98,15 @@ export function NetworkModal(props) {
                 label="RPC;RPC;RPC;"
                 multiline
                 maxRows={128}
-                defaultValue={rpc.join(";")}
                 helperText=""
                 onChange={handleSelectRpc}
               />
             </ListItem>
   
             <ListItem autoFocus button onClick={() => handleListItemClick('')}>
-                <AddIcon /> <ListItemText primary={buttonText} />
+                <AddIcon /> <ListItemText primary={"Add"} />
             </ListItem>
-        
-            
-            {(() => {
-                if(del === true) {
-                    return (
-                        <ListItem autoFocus button onClick={() => handleDelete(networkId)}>
-                <RemoveTwoToneIcon /> <ListItemText primary={"Delete"} />
-            </ListItem>
-                    )
-                }
-            })()}
+
         </List>
       </Dialog>
     );
