@@ -77,17 +77,7 @@ export function UpdateNetworkModal(props) {
                 onChange={handleSelectId}
               />
             </ListItem>
-  
-            <ListItem>
-              <TextField
-                id="outlined-helperText"
-                label="LOGO URL"
-                defaultValue={logoUrl}
-                helperText=""
-                onChange={handleSelectLogo}
-              />
-            </ListItem>
-  
+    
             <ListItem>
             <TextField
                 id="filled-multiline-flexible"
@@ -111,11 +101,21 @@ export function UpdateNetworkModal(props) {
                 onChange={handleSelectRpc}
               />
             </ListItem>
-  
+
+            <ListItem>
+              <TextField
+                id="outlined-helperText"
+                label="LOGO URL"
+                defaultValue={logoUrl}
+                helperText=""
+                onChange={handleSelectLogo}
+              />
+            </ListItem>
+{/*   
             <ListItem autoFocus button onClick={() => handleListItemClick()}>
                 <AddIcon /> <ListItemText primary={"Update network"} />
             </ListItem>
-        
+         */}
             <ListItem autoFocus button onClick={() => handleDelete(networkId)}>
                 <RemoveTwoToneIcon /> <ListItemText primary={"Delete"} />
             </ListItem>

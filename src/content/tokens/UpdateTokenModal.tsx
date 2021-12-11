@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Network } from '../../db/models/network';
 import Dialog from '@mui/material/Dialog';
 import DialogTitle from '@mui/material/DialogTitle';
@@ -8,6 +8,12 @@ import ListItemText from '@mui/material/ListItemText';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveTwoToneIcon from '@mui/icons-material/RemoveTwoTone';
 import TextField from '@mui/material/TextField';
+import { Token } from '../../db/models/token';
+import InputLabel from '@mui/material/InputLabel';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
+import MenuItem from '@mui/material/MenuItem';
+import { CountertopsOutlined } from '@mui/icons-material';
 
 
 export function UpdateTokenModal(props) {
@@ -16,110 +22,117 @@ export function UpdateTokenModal(props) {
         open,
         networkId,
         name,
-        wss,
-        rpc,
+        address,
+        abiIn,
         logoUrl
     } = props;
 
     const [selectedValueName, setSelectedValueName] = useState(name);
-    const [selectedValueId, setSelectedValueId] = useState(networkId);
-    const [selectedValueWss, setSelectedValueWss] = useState(wss);
-    const [selectedValueRpc, setSelectedValueRpc] = useState(rpc);
-    const [selectedValueLogo, setSelectedValueLogo] = useState(logoUrl);
+    const [networkList, setNetworkList] = useState([]);
+    const [selectedNetwork, setSelectedNetwork] = useState(networkId);
+    const [selectedAddress, setSelectedAddress] = useState(address);
+    const [selectedLogo, setSelectedLogo] = useState(logoUrl);
+    const [abi, setAbi] = useState(abiIn);
 
     const handleSelectName = (val) => {
       setSelectedValueName(val.target.value);
     };
-    const handleSelectId = (val) => {
-      setSelectedValueId(val.target.value);
-    };
-    const handleSelectWss = (val) => {
-      setSelectedValueWss(val.target.value);
-    };
-    const handleSelectRpc = (val) => {
-      setSelectedValueRpc(val.target.value);
-    };
-    const handleSelectLogo = (val) => {
-      setSelectedValueLogo(val.target.value);
-    };
-    const handleListItemClick = () => {
-      var net = new Network();
-      console.log(selectedValueWss);
-      net.update(Number(networkId), Number(selectedValueId), selectedValueName, selectedValueWss.split(";"), selectedValueRpc.split(";"), selectedValueLogo);
+    const handleClose = () => {
       onClose();
     };
-    const handleDelete = (value) => {
-      var net = new Network();
-      net.delete(value);
-      onClose();
+    const handleListItemClick = (value) => {
+      let token = new Token();
+      token.delete(address);
+      onClose(value);
+    };
+    const handleNetworkChange = (event) => {  
+      setSelectedNetwork(event.target.value);
+    };
+    const handleSelectAddress = (event) => {
+      setSelectedAddress(event.target.value);
+    };
+    const handleSelectLogo = (event) => {
+      setSelectedLogo(event.target.value);
+    };
+    const handleAbi = (event) => {
+      setAbi(event.target.value);
     };
 
+    useEffect(() => {
+      new Network().all().then(e => e.docs.map((v, k) => <MenuItem key={v.id} value={v.id}>{v.data().name}</MenuItem>)).then((a) => {setNetworkList(a);});
+    }, []);
+  
+
     return (
-      <Dialog onClose={onClose} open={open}>
-        <DialogTitle>Update network</DialogTitle>
+      <Dialog onClose={handleClose} open={open}>
+        <DialogTitle>Token info</DialogTitle>
         <List sx={{ pt: 0 }}>
             <ListItem>
               <TextField
                 id="outlined-helperText"
                 label="Name"
-                defaultValue={name}
                 helperText=""
                 onChange={handleSelectName}
+                fullWidth
+                defaultValue={name}
               />
             </ListItem>
-  
+
             <ListItem>
               <TextField
                 id="outlined-helperText"
-                label="ID"
-                defaultValue={networkId}
+                label="Address"
                 helperText=""
-                onChange={handleSelectId}
+                onChange={handleSelectAddress}
+                fullWidth
+                defaultValue={address}
               />
             </ListItem>
-  
+
             <ListItem>
-              <TextField
-                id="outlined-helperText"
-                label="LOGO URL"
-                defaultValue={logoUrl}
-                helperText=""
-                onChange={handleSelectLogo}
-              />
+            <FormControl fullWidth>
+              <InputLabel id="demo-simple-select-helper-label">Network</InputLabel>
+              <Select
+                labelId="demo-simple-select-helper-label"
+                id="demo-simple-select-helper"
+                value={selectedNetwork}
+                label="Network"
+                onChange={handleNetworkChange}
+              >
+              {networkList}
+              </Select>
+            {/* <FormHelperText>With label + helper text</FormHelperText> */}
+            </FormControl>
             </ListItem>
-  
+
             <ListItem>
             <TextField
-                id="filled-multiline-flexible"
-                label="WSS;WSS;WSS;"
+                id="outlined-helperText"
+                label="ABI"
                 multiline
                 maxRows={128}
-                variant="outlined"
-                defaultValue={wss}
-                onChange={handleSelectWss}
+                helperText=""
+                onChange={handleAbi}
+                defaultValue={abiIn}
               />
             </ListItem>
-  
+
+
             <ListItem>
               <TextField
                 id="outlined-helperText"
-                label="RPC;RPC;RPC;"
-                multiline
-                maxRows={128}
-                defaultValue={rpc}
+                label="Logo"
                 helperText=""
-                onChange={handleSelectRpc}
+                onChange={handleSelectLogo}
+                fullWidth
+                defaultValue={logoUrl}
               />
             </ListItem>
-  
-            <ListItem autoFocus button onClick={() => handleListItemClick()}>
-                <AddIcon /> <ListItemText primary={"Update network"} />
+
+            <ListItem autoFocus button onClick={() => handleListItemClick('')}>
+                <AddIcon /> <ListItemText primary={"Delete token"} />
             </ListItem>
-        
-            <ListItem autoFocus button onClick={() => handleDelete(networkId)}>
-                <RemoveTwoToneIcon /> <ListItemText primary={"Delete"} />
-            </ListItem>
-                 
+
         </List>
       </Dialog>
     );

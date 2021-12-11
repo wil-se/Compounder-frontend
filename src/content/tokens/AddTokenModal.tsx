@@ -11,6 +11,7 @@ import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
+import { Token } from '../../db/models/token';
 
 
 export function AddTokenModal(props) {
@@ -24,6 +25,7 @@ export function AddTokenModal(props) {
     const [selectedNetwork, setSelectedNetwork] = useState("");
     const [selectedAddress, setSelectedAddress] = useState("");
     const [selectedLogo, setSelectedLogo] = useState("");
+    const [abi, setAbi] = useState("");
 
 
     const handleSelectName = (val) => {
@@ -33,9 +35,12 @@ export function AddTokenModal(props) {
       onClose();
     };
     const handleListItemClick = (value) => {
+      let token = new Token();
+      token.setToken(selectedAddress, abi, selectedNetwork, selectedValueName, selectedLogo);
+      token.create();
       onClose(value);
     };
-    const handleNetworkChange = (event) => {
+    const handleNetworkChange = (event) => {      
       setSelectedNetwork(event.target.value);
     };
     const handleSelectAddress = (event) => {
@@ -44,10 +49,13 @@ export function AddTokenModal(props) {
     const handleSelectLogo = (event) => {
       setSelectedLogo(event.target.value);
     };
+    const handleAbi = (event) => {
+      setAbi(event.target.value);
+    };
 
 
     useEffect(() => {
-      new Network().all().then(e => e.docs.map((v, k) => <MenuItem key={k} value={v.data().name}>{v.data().name}</MenuItem>)).then((a) => {setNetworkList(a);});
+      new Network().all().then(e => e.docs.map((v, k) => <MenuItem key={v.id} value={v.id}>{v.data().name}</MenuItem>)).then((a) => {setNetworkList(a);});
     }, []);
   
     return (
@@ -88,6 +96,17 @@ export function AddTokenModal(props) {
               </Select>
             {/* <FormHelperText>With label + helper text</FormHelperText> */}
             </FormControl>
+            </ListItem>
+
+            <ListItem>
+            <TextField
+                id="outlined-helperText"
+                label="CONTRACT ABI"
+                multiline
+                maxRows={128}
+                helperText=""
+                onChange={handleAbi}
+              />
             </ListItem>
 
 

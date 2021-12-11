@@ -23,7 +23,6 @@ function NetworkList() {
     setSelectedValue(value);
   };
 
-
   useEffect(() => {
     new Network().all().then(e => e.docs.map((v, k) => <Grid key={k} xs={12} sm={6} md={3} item><CardNetwork onClose={handleClose} key={k} name={v.data().name} networkId={v.data().networkID} logoUrl={v.data().logoUrl} wss={v.data().wss.join(";")} rpc={v.data().rpc.join(";")}></CardNetwork></Grid>)).then((a) => {setNetworkList(a);});
   }, []); // eslint-disable-line react-hooks/exhaustive-deps

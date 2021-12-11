@@ -21,14 +21,8 @@ const AvatarWrapper = styled(Avatar)(
 `
 );
 
-export function CardToken({name, networkId, logoUrl, wss, rpc, onClose}) {
-  if(name === "")
-    name = "NO_NAME"
-  if(networkId === "")
-    networkId = "NO_NET_ID"
-  if(logoUrl === "")
-    logoUrl = "https://cdn.jsdelivr.net/gh/atomiclabs/cryptocurrency-icons@d5c68edec1f5eaec59ac77ff2b48144679cebca1/svg/black/generic.svg"
-  
+export function CardToken({address, abi, networkId, name, logo, onClose}) {
+
     const [open, setOpen] = useState(false);
     
     const handleClose = () => {
@@ -48,7 +42,7 @@ export function CardToken({name, networkId, logoUrl, wss, rpc, onClose}) {
             <Grid container rowSpacing={0} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
               <Grid item xs={12} display="flex" justifyContent="center" alignItems="center">
                 <AvatarWrapper>
-                  <img alt={name} src={logoUrl} />
+                  <img alt={name} src={logo} />
                 </AvatarWrapper>
               </Grid>
               <Grid item xs={12} display="flex" justifyContent="center" alignItems="center">
@@ -57,16 +51,13 @@ export function CardToken({name, networkId, logoUrl, wss, rpc, onClose}) {
                 </Typography>
               </Grid>
               <Grid item xs={12} display="flex" justifyContent="center" alignItems="center">
-              <Typography variant="subtitle1" noWrap>
-                {networkId}
-              </Typography>
               </Grid>
             </Grid>
           </CardContent>
         </Card>
       </div>
       <div>
-      <UpdateTokenModal open={open} onClose={handleClose} networkId={networkId} name={name} wss={wss} rpc={rpc} logoUrl={logoUrl} />
+      <UpdateTokenModal open={open} onClose={handleClose} networkId={networkId} name={name} logoUrl={logo} address={address} abiIn={abi}/>
       </div>
       </div>
     )
