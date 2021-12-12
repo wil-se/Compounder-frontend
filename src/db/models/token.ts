@@ -31,7 +31,7 @@ export class Token {
 
     public setToken(address: string, abi: string, network: string, name: string, logo: string) {
         this.address = address;
-        this.abi = abi;
+        this.abi = abi.replace(" ", "").replace("\n", "");
         this.network = network;
         this.name = name;
         this.logo = logo;
