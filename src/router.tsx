@@ -23,6 +23,7 @@ const Tokens = Loader(lazy(() => import('src/content/tokens')))
 const Farms = Loader(lazy(() => import('src/content/farms')))
 const Routers = Loader(lazy(() => import('src/content/routers')))
 const Compounders = Loader(lazy(() => import('src/content/compounders')))
+const Pools = Loader(lazy(() => import('src/content/pools')))
 
 
 // Status
@@ -143,14 +144,14 @@ const routes: PartialRouteObject[] = [
     ]
   },
   {
-    path: 'routers',
+    path: 'pools',
     element: (
       <SidebarLayout />
     ),
     children: [
       {
         path: '/',
-        element: <Routers />,
+        element: <Pools />,
       },
     ]
   },

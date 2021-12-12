@@ -6,6 +6,7 @@ import MonetizationOnTwoToneIcon from '@mui/icons-material/MonetizationOnTwoTone
 import AgricultureTwoToneIcon from '@mui/icons-material/AgricultureTwoTone';
 import AltRouteTwoToneIcon from '@mui/icons-material/AltRouteTwoTone';
 import SmartToyTwoToneIcon from '@mui/icons-material/SmartToyTwoTone';
+import WavesTwoToneIcon from '@mui/icons-material/WavesTwoTone';
 
 
 export interface MenuItem {
@@ -49,6 +50,11 @@ const menuItems: MenuItems[] = [
         name: 'Farms',
         icon: AgricultureTwoToneIcon,
         link: '/farms'
+      },
+      {
+        name: 'Pools',
+        icon: WavesTwoToneIcon,
+        link: '/pools'
       },
       {
         name: 'Compounders',
