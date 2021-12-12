@@ -1,7 +1,7 @@
 import { Helmet } from 'react-helmet-async';
 import { Container } from '@mui/material';
 import Footer from 'src/components/Footer';
-import RoutersList from './RoutersList';
+import { RouterList } from './RoutersList';
 
 function Routers() {
   return (
@@ -13,7 +13,7 @@ function Routers() {
         <PageHeader />
       </PageTitleWrapper> */}
       <Container maxWidth="xl">
-        <RoutersList/>
+        <RouterList/>
       </Container>
       <Footer />
     </>

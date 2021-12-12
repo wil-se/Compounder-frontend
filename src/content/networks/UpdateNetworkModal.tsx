@@ -65,6 +65,9 @@ export function UpdateNetworkModal(props) {
                 defaultValue={name}
                 helperText=""
                 onChange={handleSelectName}
+                InputProps={{
+                  readOnly: true,
+                }}
               />
             </ListItem>
   
@@ -75,6 +78,9 @@ export function UpdateNetworkModal(props) {
                 defaultValue={networkId}
                 helperText=""
                 onChange={handleSelectId}
+                InputProps={{
+                  readOnly: true,
+                }}
               />
             </ListItem>
     
@@ -87,6 +93,10 @@ export function UpdateNetworkModal(props) {
                 variant="outlined"
                 defaultValue={wss}
                 onChange={handleSelectWss}
+                fullWidth
+                InputProps={{
+                  readOnly: true,
+                }}
               />
             </ListItem>
   
@@ -99,6 +109,10 @@ export function UpdateNetworkModal(props) {
                 defaultValue={rpc}
                 helperText=""
                 onChange={handleSelectRpc}
+                fullWidth
+                InputProps={{
+                  readOnly: true,
+                }}
               />
             </ListItem>
 
@@ -109,6 +123,9 @@ export function UpdateNetworkModal(props) {
                 defaultValue={logoUrl}
                 helperText=""
                 onChange={handleSelectLogo}
+                InputProps={{
+                  readOnly: true,
+                }}
               />
             </ListItem>
 {/*   

@@ -6,27 +6,33 @@ import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import AddIcon from '@mui/icons-material/Add';
+import RemoveTwoToneIcon from '@mui/icons-material/RemoveTwoTone';
 import TextField from '@mui/material/TextField';
-import Select from '@mui/material/Select';
-import MenuItem from '@mui/material/MenuItem';
+import { Router } from '../../db/models/router';
 import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
-import { Token } from '../../db/models/token';
+import Select from '@mui/material/Select';
+import MenuItem from '@mui/material/MenuItem';
+import { CountertopsOutlined } from '@mui/icons-material';
 
 
-export function AddTokenModal(props) {
+export function UpdateRouterModal(props) {
     let {
         onClose,
         open,
+        networkId,
+        name,
+        address,
+        abiIn,
+        logoUrl
     } = props;
 
-    const [selectedValueName, setSelectedValueName] = useState("");
+    const [selectedValueName, setSelectedValueName] = useState(name);
     const [networkList, setNetworkList] = useState([]);
-    const [selectedNetwork, setSelectedNetwork] = useState("");
-    const [selectedAddress, setSelectedAddress] = useState("");
-    const [selectedLogo, setSelectedLogo] = useState("");
-    const [abi, setAbi] = useState("");
-
+    const [selectedNetwork, setSelectedNetwork] = useState(networkId);
+    const [selectedAddress, setSelectedAddress] = useState(address);
+    const [selectedLogo, setSelectedLogo] = useState(logoUrl);
+    const [abi, setAbi] = useState(abiIn);
 
     const handleSelectName = (val) => {
       setSelectedValueName(val.target.value);
@@ -35,13 +41,11 @@ export function AddTokenModal(props) {
       onClose();
     };
     const handleListItemClick = (value) => {
-      let token = new Token();
-      token.setToken(selectedAddress, abi, selectedNetwork, selectedValueName, selectedLogo);
-      token.create();
+      let router = new Router();
+      router.delete(address);
       onClose(value);
     };
-    const handleNetworkChange = (event) => {   
-      console.log();   
+    const handleNetworkChange = (event) => {  
       setSelectedNetwork(event.target.value);
     };
     const handleSelectAddress = (event) => {
@@ -54,14 +58,15 @@ export function AddTokenModal(props) {
       setAbi(event.target.value);
     };
 
-
     useEffect(() => {
-      new Network().all().then(e => e.docs.map((v, k) => <MenuItem key={v.id} data-name={v.data().name} value={v.id}>{v.data().name}</MenuItem>)).then((a) => {setNetworkList(a);});
+      console.log(networkId);
+      new Network().all().then(e => e.docs.map((v, k) => <MenuItem key={v.id} value={v.id}>{v.data().name}</MenuItem>)).then((a) => {setNetworkList(a);});
     }, []);
   
+
     return (
       <Dialog onClose={handleClose} open={open}>
-        <DialogTitle>Add token</DialogTitle>
+        <DialogTitle>Router info</DialogTitle>
         <List sx={{ pt: 0 }}>
             <ListItem>
               <TextField
@@ -70,6 +75,10 @@ export function AddTokenModal(props) {
                 helperText=""
                 onChange={handleSelectName}
                 fullWidth
+                defaultValue={name}
+                InputProps={{
+                  readOnly: true,
+                }}
               />
             </ListItem>
 
@@ -80,6 +89,10 @@ export function AddTokenModal(props) {
                 helperText=""
                 onChange={handleSelectAddress}
                 fullWidth
+                defaultValue={address}
+                InputProps={{
+                  readOnly: true,
+                }}
               />
             </ListItem>
 
@@ -107,7 +120,11 @@ export function AddTokenModal(props) {
                 maxRows={128}
                 helperText=""
                 onChange={handleAbi}
+                defaultValue={abiIn}
                 fullWidth
+                InputProps={{
+                  readOnly: true,
+                }}
               />
             </ListItem>
 
@@ -119,15 +136,18 @@ export function AddTokenModal(props) {
                 helperText=""
                 onChange={handleSelectLogo}
                 fullWidth
+                defaultValue={logoUrl}
+                InputProps={{
+                  readOnly: true,
+                }}
               />
             </ListItem>
 
             <ListItem autoFocus button onClick={() => handleListItemClick('')}>
-                <AddIcon /> <ListItemText primary={"Add token"} />
+                <AddIcon /> <ListItemText primary={"Delete router"} />
             </ListItem>
 
         </List>
       </Dialog>
     );
   }
-  

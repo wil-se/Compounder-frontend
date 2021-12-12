@@ -11,10 +11,10 @@ import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
-import { Token } from '../../db/models/token';
+import { Router } from '../../db/models/router';
 
 
-export function AddTokenModal(props) {
+export function AddRouterModal(props) {
     let {
         onClose,
         open,
@@ -35,9 +35,9 @@ export function AddTokenModal(props) {
       onClose();
     };
     const handleListItemClick = (value) => {
-      let token = new Token();
-      token.setToken(selectedAddress, abi, selectedNetwork, selectedValueName, selectedLogo);
-      token.create();
+        let router = new Router();
+        router.setRouter(selectedAddress, abi, selectedNetwork, selectedValueName, selectedLogo);
+        router.create();
       onClose(value);
     };
     const handleNetworkChange = (event) => {   
@@ -61,7 +61,7 @@ export function AddTokenModal(props) {
   
     return (
       <Dialog onClose={handleClose} open={open}>
-        <DialogTitle>Add token</DialogTitle>
+        <DialogTitle>Add router</DialogTitle>
         <List sx={{ pt: 0 }}>
             <ListItem>
               <TextField
@@ -123,7 +123,7 @@ export function AddTokenModal(props) {
             </ListItem>
 
             <ListItem autoFocus button onClick={() => handleListItemClick('')}>
-                <AddIcon /> <ListItemText primary={"Add token"} />
+                <AddIcon /> <ListItemText primary={"Add router"} />
             </ListItem>
 
         </List>

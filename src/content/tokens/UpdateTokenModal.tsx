@@ -76,6 +76,9 @@ export function UpdateTokenModal(props) {
                 onChange={handleSelectName}
                 fullWidth
                 defaultValue={name}
+                InputProps={{
+                  readOnly: true,
+                }}
               />
             </ListItem>
 
@@ -87,6 +90,9 @@ export function UpdateTokenModal(props) {
                 onChange={handleSelectAddress}
                 fullWidth
                 defaultValue={address}
+                InputProps={{
+                  readOnly: true,
+                }}
               />
             </ListItem>
 
@@ -116,6 +122,9 @@ export function UpdateTokenModal(props) {
                 onChange={handleAbi}
                 defaultValue={abiIn}
                 fullWidth
+                InputProps={{
+                  readOnly: true,
+                }}
               />
             </ListItem>
 
@@ -128,6 +137,9 @@ export function UpdateTokenModal(props) {
                 onChange={handleSelectLogo}
                 fullWidth
                 defaultValue={logoUrl}
+                InputProps={{
+                  readOnly: true,
+                }}
               />
             </ListItem>
 

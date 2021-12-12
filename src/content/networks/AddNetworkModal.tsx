@@ -86,6 +86,7 @@ export function AddNetworkModal(props) {
                 maxRows={128}
                 variant="outlined"
                 onChange={handleSelectWss}
+                fullWidth
               />
             </ListItem>
   
@@ -97,6 +98,7 @@ export function AddNetworkModal(props) {
                 maxRows={128}
                 helperText=""
                 onChange={handleSelectRpc}
+                fullWidth
               />
             </ListItem>
   
