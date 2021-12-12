@@ -39,9 +39,6 @@ function Header() {
       <Box display="flex" alignItems="center">
         <Hidden lgUp>
           <Logo />
-          <Typography variant="h4" gutterBottom component="div">
-      CHI CAZZO HA CANCELLATO LE RETI PORCODIO
-      </Typography>
         </Hidden>
         <Hidden mdDown>
           <HeaderMenu />
