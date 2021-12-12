@@ -59,7 +59,6 @@ export function UpdateRouterModal(props) {
     };
 
     useEffect(() => {
-      console.log(networkId);
       new Network().all().then(e => e.docs.map((v, k) => <MenuItem key={v.id} value={v.id}>{v.data().name}</MenuItem>)).then((a) => {setNetworkList(a);});
     }, []);
   
