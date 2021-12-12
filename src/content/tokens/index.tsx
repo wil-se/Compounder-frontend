@@ -10,9 +10,6 @@ function Tokens() {
       <Helmet>
         <title>Tokens</title>
       </Helmet>
-      {/* <PageTitleWrapper>
-        <PageHeader />
-      </PageTitleWrapper> */}
       <Container maxWidth="xl">
         <TokenList />
       </Container>

@@ -15,7 +15,6 @@ import { Farm } from '../../db/models/farm';
 import Checkbox from '@mui/material/Checkbox';
 import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
-import { Token } from '../../db/models/token';
 
 
 export function AddFarmModal(props) {
@@ -27,26 +26,17 @@ export function AddFarmModal(props) {
     const [selectedValueName, setSelectedValueName] = useState("");
     const [routerList, setRouterList] = useState([]);
     const [selectedRouter, setSelectedRouter] = useState("");
-    const [selectedPid, setSelectedPid] = useState(0);
     const [selectedPendingFName, setSelectedPendingFName] = useState("");
     const [selectedReferral, setSelectedReferral] = useState(false);
     const [selectedMasterchefAddress, setSelectedMasterchefAddress] = useState("");
     const [masterchefAbi, setMasterchefAbi] = useState("");
-    const [stakeTokenList, setStakeTokenList] = useState([]);
-    const [selectedStakeToken, setSelectedStakeToken] = useState("");
-    const [rewardTokenList, setRewardTokenList] = useState([]);
-    const [selectedRewardToken, setSelectedRewardToken] = useState("");
     const [selectedLogo, setSelectedLogo] = useState("");
 
-    
     const handleSelectPendingFName = (val) => {
       setSelectedPendingFName(val.target.value);
     };
     const handleSelectName = (val) => {
       setSelectedValueName(val.target.value);
-    };
-    const handleSelectPid = (val) => {
-        setSelectedPid(val.target.value);
     };
     const handleSelectReferral = (val) => {
         console.log(val.target.checked)
@@ -58,19 +48,13 @@ export function AddFarmModal(props) {
     const handleSelectLogo = (val) => {
         setSelectedLogo(val.target.value);
     };
-    const handleStakeTokenChange = (val) => {
-        setSelectedStakeToken(val.target.value);
-    };
-    const handleRewardTokenChange = (val) => {
-        setSelectedRewardToken(val.target.value);
-    };
     const handleMasterchefAbi = (event) => {
         setMasterchefAbi(event.target.value);
       };
     const handleClose = () => {
       onClose();
     };
-    const handleListItemClick = (value) => {
+    const handleAdd = (value) => {
       let farm = new Farm();
       farm.setFarm(selectedValueName, selectedRouter, selectedPendingFName, selectedReferral, selectedMasterchefAddress, masterchefAbi, selectedLogo);
       farm.create();
@@ -83,7 +67,6 @@ export function AddFarmModal(props) {
 
     useEffect(() => {
       new Router().all().then(e => e.docs.map((v, k) => <MenuItem key={v.id} data-name={v.data().name} value={v.id}>{v.data().name}</MenuItem>)).then((a) => {setRouterList(a);});
-      new Token().all().then(e => e.docs.map((v, k) => <MenuItem key={v.id} data-name={v.data().name} value={v.id}>{v.data().name}</MenuItem>)).then((a) => {setStakeTokenList(a);setRewardTokenList(a);});
     }, []);
   
     return (
@@ -112,7 +95,6 @@ export function AddFarmModal(props) {
               >
               {routerList}
               </Select>
-            {/* <FormHelperText>With label + helper text</FormHelperText> */}
             </FormControl>
             </ListItem>
 
@@ -164,7 +146,7 @@ export function AddFarmModal(props) {
               />
             </ListItem>
 
-            <ListItem autoFocus button onClick={() => handleListItemClick('')}>
+            <ListItem autoFocus button onClick={() => handleAdd('')}>
                 <AddIcon /> <ListItemText primary={"Add farm"} />
             </ListItem>
 

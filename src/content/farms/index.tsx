@@ -10,9 +10,6 @@ function Farms() {
       <Helmet>
         <title>Tokens</title>
       </Helmet>
-      {/* <PageTitleWrapper>
-        <PageHeader />
-      </PageTitleWrapper> */}
       <Container maxWidth="xl">
         <FarmList></FarmList>
       </Container>

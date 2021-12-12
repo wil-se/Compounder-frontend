@@ -10,23 +10,7 @@ import RemoveTwoToneIcon from '@mui/icons-material/RemoveTwoTone';
 import TextField from '@mui/material/TextField';
 
 
-export function UpdateNetworkModal(props) {
-    let {
-        onClose,
-        open,
-        networkId,
-        name,
-        wss,
-        rpc,
-        logoUrl
-    } = props;
-
-    const [selectedValueName, setSelectedValueName] = useState(name);
-    const [selectedValueId, setSelectedValueId] = useState(networkId);
-    const [selectedValueWss, setSelectedValueWss] = useState(wss);
-    const [selectedValueRpc, setSelectedValueRpc] = useState(rpc);
-    const [selectedValueLogo, setSelectedValueLogo] = useState(logoUrl);
-
+export function UpdateNetworkModal({onClose, open, networkId, name, wss, rpc, logoUrl}) {
     // const handleUpdate = () => {
     //   var net = new Network();
     //   console.log(selectedValueWss);
@@ -37,21 +21,6 @@ export function UpdateNetworkModal(props) {
       var net = new Network();
       net.delete(value);
       onClose();
-    };
-    const handleSelectName = (val) => {
-      setSelectedValueName(val.target.value);
-    };
-    const handleSelectId = (val) => {
-      setSelectedValueId(val.target.value);
-    };
-    const handleSelectWss = (val) => {
-      setSelectedValueWss(val.target.value);
-    };
-    const handleSelectRpc = (val) => {
-      setSelectedValueRpc(val.target.value);
-    };
-    const handleSelectLogo = (val) => {
-      setSelectedValueLogo(val.target.value);
     };
 
     return (
@@ -64,7 +33,6 @@ export function UpdateNetworkModal(props) {
                 label="Name"
                 defaultValue={name}
                 helperText=""
-                onChange={handleSelectName}
                 InputProps={{readOnly: true,}}
               />
             </ListItem>
@@ -75,7 +43,7 @@ export function UpdateNetworkModal(props) {
                 label="ID"
                 defaultValue={networkId}
                 helperText=""
-                onChange={handleSelectId}
+                type="number"
                 InputProps={{
                   readOnly: true,
                 }}
@@ -90,7 +58,6 @@ export function UpdateNetworkModal(props) {
                 maxRows={128}
                 variant="outlined"
                 defaultValue={wss}
-                onChange={handleSelectWss}
                 fullWidth
                 InputProps={{readOnly: true,}}
               />
@@ -104,7 +71,6 @@ export function UpdateNetworkModal(props) {
                 maxRows={128}
                 defaultValue={rpc}
                 helperText=""
-                onChange={handleSelectRpc}
                 fullWidth
                 InputProps={{readOnly: true,}}
               />
@@ -116,7 +82,6 @@ export function UpdateNetworkModal(props) {
                 label="LOGO URL"
                 defaultValue={logoUrl}
                 helperText=""
-                onChange={handleSelectLogo}
                 InputProps={{readOnly: true,}}
               />
             </ListItem>

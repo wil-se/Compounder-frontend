@@ -59,6 +59,7 @@ export function AddNetworkModal({onClose, open}) {
                 id="outlined-helperText"
                 label="ID"
                 helperText=""
+                type="number"
                 onChange={handleSelectId}
               />
             </ListItem>

@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import { Router } from '../../db/models/router';
 import Dialog from '@mui/material/Dialog';
 import DialogTitle from '@mui/material/DialogTitle';
 import List from '@mui/material/List';
@@ -12,20 +11,10 @@ import MenuItem from '@mui/material/MenuItem';
 import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
 import { Pool } from '../../db/models/pool';
-import Checkbox from '@mui/material/Checkbox';
-import FormGroup from '@mui/material/FormGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import { Token } from '../../db/models/token';
-import { Farm } from '../../db/models/farm';
 import { Compounder } from '../../db/models/compounder';
 
 
-export function AddCompounderModal(props) {
-    let {
-        onClose,
-        open,
-    } = props;
-
+export function AddCompounderModal({onClose,open,}) {
     const [poolList, setPoolList] = useState([]);
     const [selectedPool, setSelectedPool] = useState("");
     const [tickValue, setTickValue] = useState(300);
@@ -78,16 +67,11 @@ export function AddCompounderModal(props) {
     const handleSlippageChange = (event) => {   
         setSlippageValue(event.target.value);
     };
-    
     const handleStdGasChange = (event) => {   
         setStdGasValue(event.target.value);
     };
-    
-    
 
     useEffect(() => {
-      // new Farm().all().then(e => e.docs.map((v, k) => <MenuItem key={v.id} data-name={v.data().name} value={v.id}>{v.data().name}</MenuItem>)).then((a) => {setFarmList(a);});
-      // new Token().all().then(e => e.docs.map((v, k) => <MenuItem key={v.id} data-name={v.data().name} value={v.id}>{v.data().name}</MenuItem>)).then((a) => {setStakeTokenList(a);setRewardTokenList(a);setExitTokenList(a);});
       new Pool().all().then(e => e.docs.map((v, k) => <MenuItem key={v.id} data-name={v.data().name} value={v.id}>{v.data().name}</MenuItem>)).then((a) => {setPoolList(a);});
     }, []);
   
@@ -109,7 +93,6 @@ export function AddCompounderModal(props) {
               >
               {poolList}
               </Select>
-            {/* <FormHelperText>With label + helper text</FormHelperText> */}
             </FormControl>
             </ListItem>
 
@@ -222,7 +205,6 @@ export function AddCompounderModal(props) {
                 type="number"
               />
             </ListItem>
-
             
             <ListItem autoFocus button onClick={() => handleListItemClick('')}>
                 <AddIcon /> <ListItemText primary={"Add compounder"} />

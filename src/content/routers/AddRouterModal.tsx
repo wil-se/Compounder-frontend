@@ -14,12 +14,7 @@ import FormControl from '@mui/material/FormControl';
 import { Router } from '../../db/models/router';
 
 
-export function AddRouterModal(props) {
-    let {
-        onClose,
-        open,
-    } = props;
-
+export function AddRouterModal({onClose, open,}) {
     const [selectedValueName, setSelectedValueName] = useState("");
     const [networkList, setNetworkList] = useState([]);
     const [selectedNetwork, setSelectedNetwork] = useState("");
@@ -52,7 +47,6 @@ export function AddRouterModal(props) {
     const handleAbi = (event) => {
       setAbi(event.target.value);
     };
-
 
     useEffect(() => {
       new Network().all().then(e => e.docs.map((v, k) => <MenuItem key={v.id} data-name={v.data().name} value={v.id}>{v.data().name}</MenuItem>)).then((a) => {setNetworkList(a);});

@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import { Router } from '../../db/models/router';
 import Dialog from '@mui/material/Dialog';
 import DialogTitle from '@mui/material/DialogTitle';
 import List from '@mui/material/List';
@@ -12,19 +11,11 @@ import MenuItem from '@mui/material/MenuItem';
 import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
 import { Pool } from '../../db/models/pool';
-import Checkbox from '@mui/material/Checkbox';
-import FormGroup from '@mui/material/FormGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
 import { Token } from '../../db/models/token';
 import { Farm } from '../../db/models/farm';
 
 
-export function AddPoolModal(props) {
-    let {
-        onClose,
-        open,
-    } = props;
-
+export function AddPoolModal({onClose, open,}) {
     const [selectedValueName, setSelectedValueName] = useState("");
     const [farmList, setFarmList] = useState([]);
     const [selectedFarm, setSelectedFarm] = useState("");
@@ -37,7 +28,18 @@ export function AddPoolModal(props) {
     const [selectedExitToken, setSelectedExitToken] = useState("");
     const [selectedLogo, setSelectedLogo] = useState("");
 
-
+    const handleClose = () => {
+      onClose();
+    };
+    const handleAdd = (value) => {
+      let pool = new Pool();
+      pool.setPool(selectedValueName, selectedFarm, selectedRewardToken, selectedStakeToken, selectedExitToken, selectedPid, selectedLogo);
+      pool.create();
+      onClose(value);
+    };
+    const handleFarmChange = (event) => {   
+        setSelectedFarm(event.target.value);
+    };
     const handleSelectName = (val) => {
       setSelectedValueName(val.target.value);
     };
@@ -55,18 +57,6 @@ export function AddPoolModal(props) {
     };
     const handleExitTokenChange = (val) => {
         setSelectedExitToken(val.target.value);
-    };
-    const handleClose = () => {
-      onClose();
-    };
-    const handleListItemClick = (value) => {
-      let pool = new Pool();
-      pool.setPool(selectedValueName, selectedFarm, selectedRewardToken, selectedStakeToken, selectedExitToken, selectedPid, selectedLogo);
-      pool.create();
-      onClose(value);
-    };
-    const handleFarmChange = (event) => {   
-        setSelectedFarm(event.target.value);
     };
 
     useEffect(() => {
@@ -100,7 +90,6 @@ export function AddPoolModal(props) {
               >
               {farmList}
               </Select>
-            {/* <FormHelperText>With label + helper text</FormHelperText> */}
             </FormControl>
             </ListItem>
 
@@ -127,7 +116,6 @@ export function AddPoolModal(props) {
               >
               {stakeTokenList}
               </Select>
-            {/* <FormHelperText>With label + helper text</FormHelperText> */}
             </FormControl>
             </ListItem>
 
@@ -143,7 +131,6 @@ export function AddPoolModal(props) {
               >
               {rewardTokenList}
               </Select>
-            {/* <FormHelperText>With label + helper text</FormHelperText> */}
             </FormControl>
             </ListItem>
 
@@ -159,7 +146,6 @@ export function AddPoolModal(props) {
               >
               {exitTokenList}
               </Select>
-            {/* <FormHelperText>With label + helper text</FormHelperText> */}
             </FormControl>
             </ListItem>
 
@@ -173,7 +159,7 @@ export function AddPoolModal(props) {
               />
             </ListItem>
 
-            <ListItem autoFocus button onClick={() => handleListItemClick('')}>
+            <ListItem autoFocus button onClick={() => handleAdd('')}>
                 <AddIcon /> <ListItemText primary={"Add pool"} />
             </ListItem>
 

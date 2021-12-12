@@ -51,7 +51,6 @@ export class Network {
     }
 
     public async all(): Promise<QuerySnapshot<DocumentData>> {
-        console.log("mbe??");
         return await getDocs(await collection(db, "network"));
     }
 
@@ -61,7 +60,6 @@ export class Network {
 
     public async update(id: number, newId: number, name: string, wss: Array<string>, rpc: Array<string>, logoUrl: string) {
         var nets = await this.getById(id);
-        
         if(nets.docs !== undefined){
             console.log("updating..")
             await updateDoc(nets.docs[0].ref, {

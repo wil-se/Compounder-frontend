@@ -1,10 +1,8 @@
-import { AbiItem } from 'web3-utils'
 import { db } from "../firestore"
 import {
     collection,
     getDocs,
     addDoc,
-    updateDoc,
     deleteDoc,
     query,
     where,

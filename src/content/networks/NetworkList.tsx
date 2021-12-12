@@ -12,15 +12,13 @@ import { AddNetworkModal } from './AddNetworkModal'
 
 function NetworkList() {
   const [open, setOpen] = useState(false);
-  const [selectedValue, setSelectedValue] = useState("");
   const [networkList, setNetworkList] = useState([]);
 
   const handleClickOpen = () => {
     setOpen(true);
   };
-  const handleClose = (value) => {
+  const handleClose = () => {
     setOpen(false);
-    setSelectedValue(value);
   };
 
   useEffect(() => {

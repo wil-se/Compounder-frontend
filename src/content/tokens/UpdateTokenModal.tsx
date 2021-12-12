@@ -5,7 +5,6 @@ import DialogTitle from '@mui/material/DialogTitle';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
-import AddIcon from '@mui/icons-material/Add';
 import RemoveTwoToneIcon from '@mui/icons-material/RemoveTwoTone';
 import TextField from '@mui/material/TextField';
 import { Token } from '../../db/models/token';
@@ -13,30 +12,12 @@ import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
-import { CountertopsOutlined } from '@mui/icons-material';
 
 
-export function UpdateTokenModal(props) {
-    let {
-        onClose,
-        open,
-        networkId,
-        name,
-        address,
-        abiIn,
-        logoUrl
-    } = props;
-
-    const [selectedValueName, setSelectedValueName] = useState(name);
+export function UpdateTokenModal({onClose, open, networkId, name, address, abiIn, logoUrl}) {
     const [networkList, setNetworkList] = useState([]);
     const [selectedNetwork, setSelectedNetwork] = useState(networkId);
-    const [selectedAddress, setSelectedAddress] = useState(address);
-    const [selectedLogo, setSelectedLogo] = useState(logoUrl);
-    const [abi, setAbi] = useState(abiIn);
-
-    const handleSelectName = (val) => {
-      setSelectedValueName(val.target.value);
-    };
+    
     const handleClose = () => {
       onClose();
     };
@@ -45,24 +26,11 @@ export function UpdateTokenModal(props) {
       token.delete(address);
       onClose(value);
     };
-    const handleNetworkChange = (event) => {  
-      setSelectedNetwork(event.target.value);
-    };
-    const handleSelectAddress = (event) => {
-      setSelectedAddress(event.target.value);
-    };
-    const handleSelectLogo = (event) => {
-      setSelectedLogo(event.target.value);
-    };
-    const handleAbi = (event) => {
-      setAbi(event.target.value);
-    };
 
     useEffect(() => {
       new Network().all().then(e => e.docs.map((v, k) => <MenuItem key={v.id} value={v.id}>{v.data().name}</MenuItem>)).then((a) => {setNetworkList(a);});
     }, []);
   
-
     return (
       <Dialog onClose={handleClose} open={open}>
         <DialogTitle>Token info</DialogTitle>
@@ -72,12 +40,9 @@ export function UpdateTokenModal(props) {
                 id="outlined-helperText"
                 label="Name"
                 helperText=""
-                onChange={handleSelectName}
                 fullWidth
                 defaultValue={name}
-                InputProps={{
-                  readOnly: true,
-                }}
+                InputProps={{readOnly: true,}}
               />
             </ListItem>
 
@@ -86,12 +51,9 @@ export function UpdateTokenModal(props) {
                 id="outlined-helperText"
                 label="Address"
                 helperText=""
-                onChange={handleSelectAddress}
                 fullWidth
                 defaultValue={address}
-                InputProps={{
-                  readOnly: true,
-                }}
+                InputProps={{readOnly: true,}}
               />
             </ListItem>
 
@@ -103,11 +65,9 @@ export function UpdateTokenModal(props) {
                 id="demo-simple-select-helper"
                 value={selectedNetwork}
                 label="Network"
-                onChange={handleNetworkChange}
               >
               {networkList}
               </Select>
-            {/* <FormHelperText>With label + helper text</FormHelperText> */}
             </FormControl>
             </ListItem>
 
@@ -118,27 +78,20 @@ export function UpdateTokenModal(props) {
                 multiline
                 maxRows={16}
                 helperText=""
-                onChange={handleAbi}
                 defaultValue={abiIn}
                 fullWidth
-                InputProps={{
-                  readOnly: true,
-                }}
+                InputProps={{readOnly: true,}}
               />
             </ListItem>
-
 
             <ListItem>
               <TextField
                 id="outlined-helperText"
                 label="Logo"
                 helperText=""
-                onChange={handleSelectLogo}
                 fullWidth
                 defaultValue={logoUrl}
-                InputProps={{
-                  readOnly: true,
-                }}
+                InputProps={{readOnly: true,}}
               />
             </ListItem>
 

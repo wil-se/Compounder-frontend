@@ -10,9 +10,6 @@ function Compounders() {
       <Helmet>
         <title>Compounders</title>
       </Helmet>
-      {/* <PageTitleWrapper>
-        <PageHeader />
-      </PageTitleWrapper> */}
       <Container maxWidth="xl">
         <CompounderList></CompounderList>
       </Container>

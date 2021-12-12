@@ -9,9 +9,6 @@ function Pools() {
       <Helmet>
         <title>Pools</title>
       </Helmet>
-      {/* <PageTitleWrapper>
-        <PageHeader />
-      </PageTitleWrapper> */}
       <Container maxWidth="xl">
         <PoolList/>
       </Container>

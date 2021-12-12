@@ -27,7 +27,6 @@ export function AddTokenModal(props) {
     const [selectedLogo, setSelectedLogo] = useState("");
     const [abi, setAbi] = useState("");
 
-
     const handleSelectName = (val) => {
       setSelectedValueName(val.target.value);
     };
@@ -52,7 +51,6 @@ export function AddTokenModal(props) {
     const handleAbi = (event) => {
       setAbi(event.target.value);
     };
-
 
     useEffect(() => {
       new Network().all().then(e => e.docs.map((v, k) => <MenuItem key={v.id} data-name={v.data().name} value={v.id}>{v.data().name}</MenuItem>)).then((a) => {setNetworkList(a);});
