@@ -40,7 +40,7 @@ function Header() {
         <Hidden lgUp>
           <Logo />
           <Typography variant="h4" gutterBottom component="div">
-CHI È IL PEZZO DI MERDA CHE MI HA CANCELLATO LE RETI PORCODIO
+      CHI CAZZO HA CANCELLATO LE RETI PORCODIO
       </Typography>
         </Hidden>
         <Hidden mdDown>
