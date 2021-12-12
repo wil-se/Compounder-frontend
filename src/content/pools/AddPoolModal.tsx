@@ -11,49 +11,38 @@ import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
-import { Farm } from '../../db/models/farm';
+import { Pool } from '../../db/models/pool';
 import Checkbox from '@mui/material/Checkbox';
 import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import { Token } from '../../db/models/token';
+import { Farm } from '../../db/models/farm';
 
 
-export function AddFarmModal(props) {
+export function AddPoolModal(props) {
     let {
         onClose,
         open,
     } = props;
 
     const [selectedValueName, setSelectedValueName] = useState("");
-    const [routerList, setRouterList] = useState([]);
-    const [selectedRouter, setSelectedRouter] = useState("");
+    const [farmList, setFarmList] = useState([]);
+    const [selectedFarm, setSelectedFarm] = useState("");
     const [selectedPid, setSelectedPid] = useState(0);
-    const [selectedPendingFName, setSelectedPendingFName] = useState("");
-    const [selectedReferral, setSelectedReferral] = useState(false);
-    const [selectedMasterchefAddress, setSelectedMasterchefAddress] = useState("");
-    const [masterchefAbi, setMasterchefAbi] = useState("");
     const [stakeTokenList, setStakeTokenList] = useState([]);
     const [selectedStakeToken, setSelectedStakeToken] = useState("");
     const [rewardTokenList, setRewardTokenList] = useState([]);
     const [selectedRewardToken, setSelectedRewardToken] = useState("");
+    const [exitTokenList, setExitTokenList] = useState([]);
+    const [selectedExitToken, setSelectedExitToken] = useState("");
     const [selectedLogo, setSelectedLogo] = useState("");
 
-    
-    const handleSelectPendingFName = (val) => {
-      setSelectedPendingFName(val.target.value);
-    };
+
     const handleSelectName = (val) => {
       setSelectedValueName(val.target.value);
     };
     const handleSelectPid = (val) => {
         setSelectedPid(val.target.value);
-    };
-    const handleSelectReferral = (val) => {
-        console.log(val.target.checked)
-        setSelectedReferral(val.target.checked);
-    };
-    const handleSelectMasterchefAddress = (val) => {
-        setSelectedMasterchefAddress(val.target.value);
     };
     const handleSelectLogo = (val) => {
         setSelectedLogo(val.target.value);
@@ -64,31 +53,30 @@ export function AddFarmModal(props) {
     const handleRewardTokenChange = (val) => {
         setSelectedRewardToken(val.target.value);
     };
-    const handleMasterchefAbi = (event) => {
-        setMasterchefAbi(event.target.value);
-      };
+    const handleExitTokenChange = (val) => {
+        setSelectedExitToken(val.target.value);
+    };
     const handleClose = () => {
       onClose();
     };
     const handleListItemClick = (value) => {
-      let farm = new Farm();
-      farm.setFarm(selectedValueName, selectedRouter, selectedPendingFName, selectedReferral, selectedMasterchefAddress, masterchefAbi, selectedLogo);
-      farm.create();
+      let pool = new Pool();
+      pool.setPool(selectedValueName, selectedFarm, selectedRewardToken, selectedStakeToken, selectedExitToken, selectedPid, selectedLogo);
+      pool.create();
       onClose(value);
     };
-    const handleRouterChange = (event) => {   
-        console.log();   
-        setSelectedRouter(event.target.value);
+    const handleFarmChange = (event) => {   
+        setSelectedFarm(event.target.value);
     };
 
     useEffect(() => {
-      new Router().all().then(e => e.docs.map((v, k) => <MenuItem key={v.id} data-name={v.data().name} value={v.id}>{v.data().name}</MenuItem>)).then((a) => {setRouterList(a);});
-      new Token().all().then(e => e.docs.map((v, k) => <MenuItem key={v.id} data-name={v.data().name} value={v.id}>{v.data().name}</MenuItem>)).then((a) => {setStakeTokenList(a);setRewardTokenList(a);});
+      new Farm().all().then(e => e.docs.map((v, k) => <MenuItem key={v.id} data-name={v.data().name} value={v.id}>{v.data().name}</MenuItem>)).then((a) => {setFarmList(a);});
+      new Token().all().then(e => e.docs.map((v, k) => <MenuItem key={v.id} data-name={v.data().name} value={v.id}>{v.data().name}</MenuItem>)).then((a) => {setStakeTokenList(a);setRewardTokenList(a);setExitTokenList(a);});
     }, []);
   
     return (
       <Dialog onClose={handleClose} open={open}>
-        <DialogTitle>Add farm</DialogTitle>
+        <DialogTitle>Add pool</DialogTitle>
         <List sx={{ pt: 0 }}>
             <ListItem>
               <TextField
@@ -102,15 +90,15 @@ export function AddFarmModal(props) {
 
             <ListItem>
             <FormControl fullWidth>
-              <InputLabel id="demo-simple-select-helper-label">Router</InputLabel>
+              <InputLabel id="demo-simple-select-helper-label">Farm</InputLabel>
               <Select
                 labelId="demo-simple-select-helper-label"
                 id="demo-simple-select-helper"
-                value={selectedRouter}
-                label="Network"
-                onChange={handleRouterChange}
+                value={selectedFarm}
+                label="Farm"
+                onChange={handleFarmChange}
               >
-              {routerList}
+              {farmList}
               </Select>
             {/* <FormHelperText>With label + helper text</FormHelperText> */}
             </FormControl>
@@ -119,41 +107,61 @@ export function AddFarmModal(props) {
             <ListItem>
               <TextField
                 id="outlined-helperText"
-                label="PendingFName"
+                label="POOL ID"
                 helperText=""
-                onChange={handleSelectPendingFName}
+                onChange={handleSelectPid}
                 fullWidth
               />
             </ListItem>
 
             <ListItem>
-                <FormGroup>
-                    <FormControlLabel onChange={handleSelectReferral} control={<Checkbox defaultChecked={selectedReferral} />} label="Has referral" />
-                </FormGroup>            
+            <FormControl fullWidth>
+              <InputLabel id="demo-simple-select-helper-label">Stake token</InputLabel>
+              <Select
+                labelId="demo-simple-select-helper-label"
+                id="demo-simple-select-helper"
+                value={selectedStakeToken}
+                label="Stake Token"
+                onChange={handleStakeTokenChange}
+              >
+              {stakeTokenList}
+              </Select>
+            {/* <FormHelperText>With label + helper text</FormHelperText> */}
+            </FormControl>
             </ListItem>
 
             <ListItem>
-              <TextField
-                id="outlined-helperText"
-                label="Masterchef address"
-                helperText=""
-                onChange={handleSelectMasterchefAddress}
-                fullWidth
-              />
+            <FormControl fullWidth>
+              <InputLabel id="demo-simple-select-helper-label">Reward token</InputLabel>
+              <Select
+                labelId="demo-simple-select-helper-label"
+                id="demo-simple-select-helper"
+                value={selectedRewardToken}
+                label="Reward Token"
+                onChange={handleRewardTokenChange}
+              >
+              {rewardTokenList}
+              </Select>
+            {/* <FormHelperText>With label + helper text</FormHelperText> */}
+            </FormControl>
             </ListItem>
 
             <ListItem>
-            <TextField
-                id="outlined-helperText"
-                label="Masterchef ABI"
-                multiline
-                maxRows={16}
-                helperText=""
-                onChange={handleMasterchefAbi}
-                fullWidth
-              />
+            <FormControl fullWidth>
+              <InputLabel id="demo-simple-select-helper-label">Exit token</InputLabel>
+              <Select
+                labelId="demo-simple-select-helper-label"
+                id="demo-simple-select-helper"
+                value={selectedExitToken}
+                label="Exit Token"
+                onChange={handleExitTokenChange}
+              >
+              {exitTokenList}
+              </Select>
+            {/* <FormHelperText>With label + helper text</FormHelperText> */}
+            </FormControl>
             </ListItem>
-            
+
             <ListItem>
               <TextField
                 id="outlined-helperText"
@@ -165,7 +173,7 @@ export function AddFarmModal(props) {
             </ListItem>
 
             <ListItem autoFocus button onClick={() => handleListItemClick('')}>
-                <AddIcon /> <ListItemText primary={"Add farm"} />
+                <AddIcon /> <ListItemText primary={"Add pool"} />
             </ListItem>
 
         </List>

@@ -30,26 +30,20 @@ export class Farm {
     public constructor() {
         this.name = "";
         this.routerID = "";
-        this.pid = -99999;
         this.pendingFName = "";
         this.hasReferral = false;
         this.masterChefAddress = "";
         this.masterchefAbi = "";
-        this.stakeTokenID = "";
-        this.rewardTokenID = "";
         this.logoUrl = "";
     }
 
-    public setFarm(name: string, routerID: string, pid: number, pendingFName: string, hasReferral: boolean, masterChefAddress: string, masterchefAbi: string, stakeTokenID: string, rewardTokenID: string, logoUrl: string): void {
+    public setFarm(name: string, routerID: string, pendingFName: string, hasReferral: boolean, masterChefAddress: string, masterchefAbi: string, logoUrl: string): void {
         this.name = name;
         this.routerID = routerID;
-        this.pid = pid;
         this.pendingFName = pendingFName;
         this.hasReferral = hasReferral;
         this.masterChefAddress = masterChefAddress;
         this.masterchefAbi = masterchefAbi;
-        this.stakeTokenID = stakeTokenID;
-        this.rewardTokenID = rewardTokenID;
         this.logoUrl = logoUrl;
     }
 
@@ -58,13 +52,10 @@ export class Farm {
         return await addDoc(await collection(db, "farm"), { 
             name: this.name.toUpperCase(),
             routerID: this.routerID,
-            pid: this.pid,
             pendingFName: this.pendingFName,
             hasReferral: this.hasReferral,
             masterchefAddress: this.masterChefAddress,
             masterchefAbi: this.masterchefAbi,
-            stakeTokenID: this.stakeTokenID,
-            rewardTokenID: this.rewardTokenID,
             logoUrl: this.logoUrl,
         });
     }

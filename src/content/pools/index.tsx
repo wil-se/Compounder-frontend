@@ -1,7 +1,7 @@
 import { Helmet } from 'react-helmet-async';
 import { Container } from '@mui/material';
 import Footer from 'src/components/Footer';
-// import { PoolList } from './PoolList';
+import { PoolList } from './PoolList';
 
 function Pools() {
   return (
@@ -13,7 +13,7 @@ function Pools() {
         <PageHeader />
       </PageTitleWrapper> */}
       <Container maxWidth="xl">
-        {/* <RouterList/> */}
+        <PoolList/>
       </Container>
       <Footer />
     </>

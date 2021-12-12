@@ -42,15 +42,10 @@ export function UpdateFarmModal(props) {
     const [selectedValueName, setSelectedValueName] = useState(name);
     const [routerList, setRouterList] = useState([]);
     const [selectedRouter, setSelectedRouter] = useState(router);
-    const [selectedPid, setSelectedPid] = useState(pid);
     const [selectedPendingFName, setSelectedPendingFName] = useState(pendingFName);
     const [selectedReferral, setSelectedReferral] = useState(referral);
     const [selectedMasterchefAddress, setSelectedMasterchefAddress] = useState(masterchefAddress);
     const [masterchefAbi, setMasterchefAbi] = useState(masterchefAbiIn);
-    const [stakeTokenList, setStakeTokenList] = useState([]);
-    const [selectedStakeToken, setSelectedStakeToken] = useState(stakeToken);
-    const [rewardTokenList, setRewardTokenList] = useState([]);
-    const [selectedRewardToken, setSelectedRewardToken] = useState(rewardToken);
     const [selectedLogo, setSelectedLogo] = useState(logo);
     
     const handleSelectPendingFName = (val) => {
@@ -59,11 +54,7 @@ export function UpdateFarmModal(props) {
     const handleSelectName = (val) => {
       setSelectedValueName(val.target.value);
     };
-    const handleSelectPid = (val) => {
-        setSelectedPid(val.target.value);
-    };
     const handleSelectReferral = (val) => {
-        console.log(val.target.checked)
         setSelectedReferral(val.target.checked);
     };
     const handleSelectMasterchefAddress = (val) => {
@@ -71,12 +62,6 @@ export function UpdateFarmModal(props) {
     };
     const handleSelectLogo = (val) => {
         setSelectedLogo(val.target.value);
-    };
-    const handleStakeTokenChange = (val) => {
-        setSelectedStakeToken(val.target.value);
-    };
-    const handleRewardTokenChange = (val) => {
-        setSelectedRewardToken(val.target.value);
     };
     const handleMasterchefAbi = (event) => {
         setMasterchefAbi(event.target.value);
@@ -95,7 +80,7 @@ export function UpdateFarmModal(props) {
 
     useEffect(() => {
       new Router().all().then(e => e.docs.map((v, k) => <MenuItem key={v.id} data-name={v.data().name} value={v.id}>{v.data().name}</MenuItem>)).then((a) => {setRouterList(a);});
-      new Token().all().then(e => e.docs.map((v, k) => <MenuItem key={v.id} data-name={v.data().name} value={v.id}>{v.data().name}</MenuItem>)).then((a) => {setStakeTokenList(a);setRewardTokenList(a);});
+      // new Token().all().then(e => e.docs.map((v, k) => <MenuItem key={v.id} data-name={v.data().name} value={v.id}>{v.data().name}</MenuItem>)).then((a) => {setStakeTokenList(a);setRewardTokenList(a);});
     }, []);
   
     return (
@@ -127,17 +112,6 @@ export function UpdateFarmModal(props) {
               </Select>
             {/* <FormHelperText>With label + helper text</FormHelperText> */}
             </FormControl>
-            </ListItem>
-
-            <ListItem>
-              <TextField
-                id="outlined-helperText"
-                label="POOL ID"
-                helperText=""
-                onChange={handleSelectPid}
-                fullWidth
-                defaultValue={selectedPid}
-              />
             </ListItem>
 
             <ListItem>
@@ -179,40 +153,6 @@ export function UpdateFarmModal(props) {
                 fullWidth
                 defaultValue={masterchefAbi}
               />
-            </ListItem>
-
-            <ListItem>
-            <FormControl fullWidth>
-              <InputLabel id="demo-simple-select-helper-label">Stake token</InputLabel>
-              <Select
-                labelId="demo-simple-select-helper-label"
-                id="demo-simple-select-helper"
-                value={selectedStakeToken}
-                label="Stake Token"
-                onChange={handleStakeTokenChange}
-                defaultValue={stakeToken}
-              >
-              {stakeTokenList}
-              </Select>
-            {/* <FormHelperText>With label + helper text</FormHelperText> */}
-            </FormControl>
-            </ListItem>
-
-            <ListItem>
-            <FormControl fullWidth>
-              <InputLabel id="demo-simple-select-helper-label">Reward token</InputLabel>
-              <Select
-                labelId="demo-simple-select-helper-label"
-                id="demo-simple-select-helper"
-                value={selectedRewardToken}
-                label="Reward Token"
-                onChange={handleRewardTokenChange}
-                defaultValue={rewardToken}
-              >
-              {rewardTokenList}
-              </Select>
-            {/* <FormHelperText>With label + helper text</FormHelperText> */}
-            </FormControl>
             </ListItem>
 
             <ListItem>
