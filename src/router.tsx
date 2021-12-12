@@ -13,20 +13,13 @@ const Loader = (Component) => (props) => (
   </Suspense>
 );
 
-
-// Dashboards
-
-const Crypto = Loader(lazy(() => import('src/content/dashboards/Crypto')));
-
+const Dashboard = Loader(lazy(() => import('src/content/dashboards')));
 const Networks = Loader(lazy(() => import('src/content/networks')))
 const Tokens = Loader(lazy(() => import('src/content/tokens')))
 const Farms = Loader(lazy(() => import('src/content/farms')))
 const Routers = Loader(lazy(() => import('src/content/routers')))
-const Compounders = Loader(lazy(() => import('src/content/compounders')))
 const Pools = Loader(lazy(() => import('src/content/pools')))
-
-
-// Status
+const Compounders = Loader(lazy(() => import('src/content/compounders')))
 
 const Status404 = Loader(lazy(() => import('src/content/pages/Status/Status404')));
 const Status500 = Loader(lazy(() => import('src/content/pages/Status/Status500')));
@@ -91,7 +84,7 @@ const routes: PartialRouteObject[] = [
     children: [
       {
         path: '/',
-        element: <Crypto />,
+        element: <Dashboard />,
       },
     ]
   },

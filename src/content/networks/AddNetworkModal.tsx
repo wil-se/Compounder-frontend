@@ -9,18 +9,22 @@ import AddIcon from '@mui/icons-material/Add';
 import TextField from '@mui/material/TextField';
 
 
-export function AddNetworkModal(props) {
-    let {
-        onClose,
-        open,
-    } = props;
-
+export function AddNetworkModal({onClose, open}) {
     const [selectedValueName, setSelectedValueName] = useState("");
     const [selectedValueId, setSelectedValueId] = useState(0);
     const [selectedValueWss, setSelectedValueWss] = useState("");
     const [selectedValueRpc, setSelectedValueRpc] = useState("");
     const [selectedValueLogo, setSelectedValueLogo] = useState("");
   
+    const handleClose = () => {
+      onClose();
+    };
+    const handleAdd = (value) => {
+      var net = new Network();
+      net.setNetwork(Number(selectedValueId), selectedValueName, selectedValueWss.split(";"), selectedValueRpc.split(";"), selectedValueLogo);
+      net.create();  
+      onClose(value);
+    };
     const handleSelectName = (val) => {
       setSelectedValueName(val.target.value);
     };
@@ -35,16 +39,6 @@ export function AddNetworkModal(props) {
     };
     const handleSelectLogo = (val) => {
       setSelectedValueLogo(val.target.value);
-    };
-    const handleClose = () => {
-      onClose();
-    };
-
-    const handleListItemClick = (value) => {
-      var net = new Network();
-      net.setNetwork(Number(selectedValueId), selectedValueName, selectedValueWss.split(";"), selectedValueRpc.split(";"), selectedValueLogo);
-      net.create()  
-      onClose(value);
     };
   
     return (
@@ -102,7 +96,7 @@ export function AddNetworkModal(props) {
               />
             </ListItem>
   
-            <ListItem autoFocus button onClick={() => handleListItemClick('')}>
+            <ListItem autoFocus button onClick={() => handleAdd('')}>
                 <AddIcon /> <ListItemText primary={"Add"} />
             </ListItem>
 
@@ -110,4 +104,3 @@ export function AddNetworkModal(props) {
       </Dialog>
     );
   }
-  

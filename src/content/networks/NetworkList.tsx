@@ -45,7 +45,6 @@ function NetworkList() {
         </Button>
       </Box>
         <AddNetworkModal
-          selectedValue={selectedValue}
           open={open}
           onClose={handleClose}
         />

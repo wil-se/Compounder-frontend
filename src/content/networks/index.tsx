@@ -5,15 +5,11 @@ import NetworkList from './NetworkList';
 
 
 function Networks() {
-  
   return (
     <>
       <Helmet>
         <title>Networks</title>
       </Helmet>
-      {/* <PageTitleWrapper>
-        <PageHeader />
-      </PageTitleWrapper> */}
       <Container maxWidth="xl">
           <NetworkList/>
       </Container>

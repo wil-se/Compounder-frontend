@@ -51,6 +51,7 @@ export class Network {
     }
 
     public async all(): Promise<QuerySnapshot<DocumentData>> {
+        console.log("mbe??");
         return await getDocs(await collection(db, "network"));
     }
 

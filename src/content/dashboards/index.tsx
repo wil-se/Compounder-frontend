@@ -1,22 +1,16 @@
 import { Helmet } from 'react-helmet-async';
 import { Grid, Container } from '@mui/material';
 import Footer from 'src/components/Footer';
-// import { Network } from '../../../db/models/network';
 
 
-function DashboardCrypto() {
-  // const net: Network = new Network(0, "Cronos");
-  // net.all().then(e => e.forEach(k => console.log(k.data())));
-  // net.create();
-  
+function Dashboard() {
+
   return (
     <>
       <Helmet>
         <title>Dashboard</title>
       </Helmet>
-      {/* <PageTitleWrapper>
-        <PageHeader />
-      </PageTitleWrapper> */}
+
       <Container maxWidth="lg">
         <Grid
           container
@@ -40,4 +34,4 @@ function DashboardCrypto() {
   );
 }
 
-export default DashboardCrypto;
+export default Dashboard;

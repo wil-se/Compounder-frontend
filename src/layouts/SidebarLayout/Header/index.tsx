@@ -9,6 +9,8 @@ import CloseTwoToneIcon from '@mui/icons-material/CloseTwoTone';
 import HeaderMenu from './Menu';
 import HeaderButtons from './Buttons';
 import Logo from 'src/components/Logo';
+import Typography from '@mui/material/Typography';
+
 
 const HeaderWrapper = styled(Box)(
   ({ theme }) => `
@@ -37,6 +39,9 @@ function Header() {
       <Box display="flex" alignItems="center">
         <Hidden lgUp>
           <Logo />
+          <Typography variant="h4" gutterBottom component="div">
+CHI È IL PEZZO DI MERDA CHE MI HA CANCELLATO LE RETI PORCODIO
+      </Typography>
         </Hidden>
         <Hidden mdDown>
           <HeaderMenu />

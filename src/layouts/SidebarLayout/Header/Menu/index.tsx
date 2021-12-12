@@ -11,6 +11,7 @@ import { NavLink } from 'react-router-dom';
 import { styled } from '@mui/material/styles';
 import ExpandMoreTwoToneIcon from '@mui/icons-material/ExpandMoreTwoTone';
 
+
 const ListWrapper = styled(Box)(
   ({ theme }) => `
         .MuiTouchRipple-root {
@@ -82,17 +83,6 @@ function HeaderMenu() {
           <ListItem
             classes={{ root: 'MuiListItem-indicators' }}
             button
-            component={NavLink}
-            to="/"
-          >
-            <ListItemText
-              primaryTypographyProps={{ noWrap: true }}
-              primary="Click"
-            />
-          </ListItem>
-          <ListItem
-            classes={{ root: 'MuiListItem-indicators' }}
-            button
             ref={ref}
             onClick={handleOpen}
           >
@@ -100,7 +90,7 @@ function HeaderMenu() {
               primaryTypographyProps={{ noWrap: true }}
               primary={
                 <Box display="flex" alignItems="center">
-                  Others
+                  Network
                   <Box display="flex" alignItems="center" pl={0.3}>
                     <ExpandMoreTwoToneIcon fontSize="small" />
                   </Box>
@@ -108,16 +98,19 @@ function HeaderMenu() {
               }
             />
           </ListItem>
+
+          <ListItem
+            classes={{ root: 'MuiListItem-indicators' }}
+            button
+            ref={ref}
+            onClick={handleOpen}
+          >
+
+
+          </ListItem>
+
         </List>
       </ListWrapper>
-      <Menu anchorEl={ref.current} onClose={handleClose} open={isOpen}>
-        <MenuItem sx={{ px: 3 }} component={NavLink} to="/">
-          Overview
-        </MenuItem>
-        <MenuItem sx={{ px: 3 }} component={NavLink} to="/">
-          Tabs
-        </MenuItem>
-      </Menu>
     </>
   );
 }

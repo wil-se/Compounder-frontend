@@ -27,6 +27,17 @@ export function UpdateNetworkModal(props) {
     const [selectedValueRpc, setSelectedValueRpc] = useState(rpc);
     const [selectedValueLogo, setSelectedValueLogo] = useState(logoUrl);
 
+    // const handleUpdate = () => {
+    //   var net = new Network();
+    //   console.log(selectedValueWss);
+    //   net.update(Number(networkId), Number(selectedValueId), selectedValueName, selectedValueWss.split(";"), selectedValueRpc.split(";"), selectedValueLogo);
+    //   onClose();
+    // };
+    const handleDelete = (value) => {
+      var net = new Network();
+      net.delete(value);
+      onClose();
+    };
     const handleSelectName = (val) => {
       setSelectedValueName(val.target.value);
     };
@@ -42,17 +53,6 @@ export function UpdateNetworkModal(props) {
     const handleSelectLogo = (val) => {
       setSelectedValueLogo(val.target.value);
     };
-    const handleListItemClick = () => {
-      var net = new Network();
-      console.log(selectedValueWss);
-      net.update(Number(networkId), Number(selectedValueId), selectedValueName, selectedValueWss.split(";"), selectedValueRpc.split(";"), selectedValueLogo);
-      onClose();
-    };
-    const handleDelete = (value) => {
-      var net = new Network();
-      net.delete(value);
-      onClose();
-    };
 
     return (
       <Dialog onClose={onClose} open={open}>
@@ -65,9 +65,7 @@ export function UpdateNetworkModal(props) {
                 defaultValue={name}
                 helperText=""
                 onChange={handleSelectName}
-                InputProps={{
-                  readOnly: true,
-                }}
+                InputProps={{readOnly: true,}}
               />
             </ListItem>
   
@@ -94,9 +92,7 @@ export function UpdateNetworkModal(props) {
                 defaultValue={wss}
                 onChange={handleSelectWss}
                 fullWidth
-                InputProps={{
-                  readOnly: true,
-                }}
+                InputProps={{readOnly: true,}}
               />
             </ListItem>
   
@@ -110,9 +106,7 @@ export function UpdateNetworkModal(props) {
                 helperText=""
                 onChange={handleSelectRpc}
                 fullWidth
-                InputProps={{
-                  readOnly: true,
-                }}
+                InputProps={{readOnly: true,}}
               />
             </ListItem>
 
@@ -123,16 +117,14 @@ export function UpdateNetworkModal(props) {
                 defaultValue={logoUrl}
                 helperText=""
                 onChange={handleSelectLogo}
-                InputProps={{
-                  readOnly: true,
-                }}
+                InputProps={{readOnly: true,}}
               />
             </ListItem>
-{/*   
-            <ListItem autoFocus button onClick={() => handleListItemClick()}>
+          {/*   
+            <ListItem autoFocus button onClick={() => handleUpdate()}>
                 <AddIcon /> <ListItemText primary={"Update network"} />
             </ListItem>
-         */}
+          */}
             <ListItem autoFocus button onClick={() => handleDelete(networkId)}>
                 <RemoveTwoToneIcon /> <ListItemText primary={"Delete"} />
             </ListItem>
