@@ -116,7 +116,7 @@ export function UpdateTokenModal(props) {
                 id="outlined-helperText"
                 label="ABI"
                 multiline
-                maxRows={128}
+                maxRows={16}
                 helperText=""
                 onChange={handleAbi}
                 defaultValue={abiIn}
@@ -143,7 +143,7 @@ export function UpdateTokenModal(props) {
             </ListItem>
 
             <ListItem autoFocus button onClick={() => handleListItemClick('')}>
-                <AddIcon /> <ListItemText primary={"Delete token"} />
+                <RemoveTwoToneIcon /> <ListItemText primary={"Delete token"} />
             </ListItem>
 
         </List>

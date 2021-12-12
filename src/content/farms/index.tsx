@@ -1,6 +1,7 @@
 import { Helmet } from 'react-helmet-async';
 import { Container } from '@mui/material';
 import Footer from 'src/components/Footer';
+import { FarmList } from './FarmList';
 
 
 function Farms() {
@@ -13,6 +14,7 @@ function Farms() {
         <PageHeader />
       </PageTitleWrapper> */}
       <Container maxWidth="xl">
+        <FarmList></FarmList>
       </Container>
       <Footer />
     </>

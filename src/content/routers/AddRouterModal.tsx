@@ -27,7 +27,6 @@ export function AddRouterModal(props) {
     const [selectedLogo, setSelectedLogo] = useState("");
     const [abi, setAbi] = useState("");
 
-
     const handleSelectName = (val) => {
       setSelectedValueName(val.target.value);
     };
@@ -104,13 +103,12 @@ export function AddRouterModal(props) {
                 id="outlined-helperText"
                 label="ABI"
                 multiline
-                maxRows={128}
+                maxRows={16}
                 helperText=""
                 onChange={handleAbi}
                 fullWidth
               />
             </ListItem>
-
 
             <ListItem>
               <TextField

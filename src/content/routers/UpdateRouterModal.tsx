@@ -116,7 +116,7 @@ export function UpdateRouterModal(props) {
                 id="outlined-helperText"
                 label="ABI"
                 multiline
-                maxRows={128}
+                maxRows={16}
                 helperText=""
                 onChange={handleAbi}
                 defaultValue={abiIn}

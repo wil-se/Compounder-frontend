@@ -41,7 +41,6 @@ export function AddTokenModal(props) {
       onClose(value);
     };
     const handleNetworkChange = (event) => {   
-      console.log();   
       setSelectedNetwork(event.target.value);
     };
     const handleSelectAddress = (event) => {
@@ -104,13 +103,12 @@ export function AddTokenModal(props) {
                 id="outlined-helperText"
                 label="ABI"
                 multiline
-                maxRows={128}
+                maxRows={16}
                 helperText=""
                 onChange={handleAbi}
                 fullWidth
               />
             </ListItem>
-
 
             <ListItem>
               <TextField
