@@ -111,6 +111,7 @@ export function AddPoolModal(props) {
                 helperText=""
                 onChange={handleSelectPid}
                 fullWidth
+                type="number"
               />
             </ListItem>
 

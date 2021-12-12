@@ -46,7 +46,7 @@ export class Token {
         if(this.address !== undefined)
             var nets = await this.getByAddress(this.address);
             if(nets.docs.length === 0)
-                return await addDoc(await collection(db, "token"), { 
+                return await addDoc(collection(db, "token"), { 
                     address: this.address, 
                     abi: this.abi,
                     network: this.network,
@@ -56,7 +56,7 @@ export class Token {
     }
     
     public async all(): Promise<QuerySnapshot<DocumentData>> {
-        return await getDocs(await collection(db, "token"));
+        return await getDocs(collection(db, "token"));
     }
 
     public async delete(address: string) {
