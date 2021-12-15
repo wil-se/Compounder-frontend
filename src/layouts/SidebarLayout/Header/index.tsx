@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 
-import { Box, Hidden, IconButton, Tooltip } from '@mui/material';
+import { Box, Hidden, IconButton, Tooltip, Button } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import MenuTwoToneIcon from '@mui/icons-material/MenuTwoTone';
 import { SidebarContext } from 'src/contexts/SidebarContext';
@@ -10,6 +10,10 @@ import HeaderMenu from './Menu';
 import HeaderButtons from './Buttons';
 import Logo from 'src/components/Logo';
 import Typography from '@mui/material/Typography';
+
+import { Mainnet, DAppProvider, useEtherBalance, useEthers, Config } from '@usedapp/core'
+import { formatEther } from '@ethersproject/units'
+
 
 
 const HeaderWrapper = styled(Box)(
@@ -33,7 +37,8 @@ const HeaderWrapper = styled(Box)(
 
 function Header() {
   const { sidebarToggle, toggleSidebar } = useContext(SidebarContext);
-
+  const { activateBrowserWallet, account } = useEthers()
+  const etherBalance = useEtherBalance(account) 
   return (
     <HeaderWrapper display="flex" alignItems="center">
       <Box display="flex" alignItems="center">
@@ -44,8 +49,18 @@ function Header() {
           <HeaderMenu />
         </Hidden>
       </Box>
+      {account && <p>{account}</p>}
       <Box display="flex" alignItems="center">
         <HeaderButtons />
+        <Button
+          size="small"
+          variant="outlined"
+          onClick={() => activateBrowserWallet()}
+        >
+          
+          {!account ? "Connect wallet" : "Connected"}
+        </Button>
+        
         <Hidden lgUp>
           <Tooltip arrow title="Toggle Menu">
             <IconButton color="primary" onClick={toggleSidebar}>

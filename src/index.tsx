@@ -7,12 +7,19 @@ import { BrowserRouter } from 'react-router-dom';
 
 import 'nprogress/nprogress.css';
 import { SidebarProvider } from './contexts/SidebarContext';
+import { DAppProvider } from "@usedapp/core";
+import { StrictMode } from 'react';
+
 
 ReactDOM.render(
   <HelmetProvider>
     <SidebarProvider>
       <BrowserRouter>
+      <StrictMode>
+      <DAppProvider config={{}}>
         <App />
+      </DAppProvider>
+      </StrictMode>
       </BrowserRouter>
     </SidebarProvider>
   </HelmetProvider>,
