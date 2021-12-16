@@ -54,7 +54,7 @@ function Header() {
         <HeaderButtons />
         <Button
           size="small"
-          variant="outlined"
+          variant="contained"
           onClick={() => activateBrowserWallet()}
         >
           
