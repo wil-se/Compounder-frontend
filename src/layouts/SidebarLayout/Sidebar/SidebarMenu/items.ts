@@ -7,6 +7,7 @@ import AgricultureTwoToneIcon from '@mui/icons-material/AgricultureTwoTone';
 import AltRouteTwoToneIcon from '@mui/icons-material/AltRouteTwoTone';
 import SmartToyTwoToneIcon from '@mui/icons-material/SmartToyTwoTone';
 import WavesTwoToneIcon from '@mui/icons-material/WavesTwoTone';
+import AccountCircleTwoToneIcon from '@mui/icons-material/AccountCircleTwoTone';
 
 
 export interface MenuItem {
@@ -32,9 +33,44 @@ const menuItems: MenuItems[] = [
         icon: TableChartTwoToneIcon
       },
       {
-        name: 'Networks',
-        icon: AccountTreeTwoToneIcon,
-        link: '/networks'
+        name: 'User',
+        icon: AccountCircleTwoToneIcon,
+        link: '/profile',
+        items: [
+          {
+            name: 'Details',
+            link: '/profile/details'
+          },
+          {
+            name: 'Settings',
+            link: '/profile/settings'
+          }
+        ]
+      },
+      {
+        name: 'Compounders',
+        icon: SmartToyTwoToneIcon,
+        link: '/compounders',
+        items: [
+          {
+            name: 'Settings',
+            link: '/compounders/settings'
+          },
+          {
+            name: 'Instances',
+            link: '/compounders/instances'
+          }
+        ]
+      },
+      {
+        name: 'Pools',
+        icon: WavesTwoToneIcon,
+        link: '/pools'
+      },
+      {
+        name: 'Farms',
+        icon: AgricultureTwoToneIcon,
+        link: '/farms'
       },
       {
         name: 'Tokens',
@@ -47,22 +83,13 @@ const menuItems: MenuItems[] = [
         link: '/routers'
       },
       {
-        name: 'Farms',
-        icon: AgricultureTwoToneIcon,
-        link: '/farms'
-      },
-      {
-        name: 'Pools',
-        icon: WavesTwoToneIcon,
-        link: '/pools'
-      },
-      {
-        name: 'Compounders',
-        icon: SmartToyTwoToneIcon,
-        link: '/compounders'
+        name: 'Networks',
+        icon: AccountTreeTwoToneIcon,
+        link: '/networks'
       },
     ]
   },
+
 ];
 
 export default menuItems;

@@ -20,6 +20,8 @@ const Farms = Loader(lazy(() => import('src/content/farms')))
 const Routers = Loader(lazy(() => import('src/content/routers')))
 const Pools = Loader(lazy(() => import('src/content/pools')))
 const Compounders = Loader(lazy(() => import('src/content/compounders')))
+const DetailsUser = Loader(lazy(() => import('src/content/user/Details')))
+const SettingsUser = Loader(lazy(() => import('src/content/user/Settings')))
 
 const Status404 = Loader(lazy(() => import('src/content/pages/Status/Status404')));
 const Status500 = Loader(lazy(() => import('src/content/pages/Status/Status500')));
@@ -86,6 +88,22 @@ const routes: PartialRouteObject[] = [
         path: '/',
         element: <Dashboard />,
       },
+    ]
+  },
+  {
+    path: 'profile',
+    element: (
+      <SidebarLayout />
+    ),
+    children: [
+      {
+        path: 'details',
+        element: <DetailsUser />
+      },
+      {
+        path: 'settings',
+        element: <SettingsUser />
+      }
     ]
   },
   {
@@ -158,6 +176,15 @@ const routes: PartialRouteObject[] = [
         path: '/',
         element: <Compounders />,
       },
+      {
+        path: '/settings',
+        element: <Compounders />,
+      },
+      {
+        path: '/instances',
+        element: <Compounders />,
+      },
+      
     ]
   },
   
