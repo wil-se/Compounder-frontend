@@ -39,6 +39,7 @@ function Header() {
   const { sidebarToggle, toggleSidebar } = useContext(SidebarContext);
   const { activateBrowserWallet, account } = useEthers()
   const etherBalance = useEtherBalance(account) 
+
   return (
     <HeaderWrapper display="flex" alignItems="center">
       <Box display="flex" alignItems="center">
@@ -49,7 +50,12 @@ function Header() {
           <HeaderMenu />
         </Hidden>
       </Box>
+      <Box display="block" alignItems="center">
       {account && <p>{account}</p>}
+      </Box>
+      <Box display="block" alignItems="center">
+      {etherBalance && <p>{parseFloat(formatEther(etherBalance)).toFixed(3)} ETH</p>}
+      </Box>
       <Box display="flex" alignItems="center">
         <HeaderButtons />
         <Button
