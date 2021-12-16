@@ -109,8 +109,8 @@ function Logo() {
       </LogoSignWrapper>
       <Hidden smDown>
         <LogoTextWrapper>
-          <Tooltip title="Version 0.1.0" arrow placement="right">
-            <VersionBadge>0.1</VersionBadge>
+          <Tooltip title="Version 0.2.0" arrow placement="right">
+            <VersionBadge>0.2</VersionBadge>
           </Tooltip>
           <LogoText>Compounder</LogoText>
         </LogoTextWrapper>
