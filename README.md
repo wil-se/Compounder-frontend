@@ -1,4 +1,4 @@
-# CompounderGUI
+# CompounderFRONT
 
 npm i --force
 
