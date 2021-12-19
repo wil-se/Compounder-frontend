@@ -21,7 +21,7 @@ const AvatarWrapper = styled(Avatar)(
 `
 );
 
-export function CardRouter({address, abi, networkId, name, logo, onClose}) {
+export function CardRouter({address, abi, routerId, networkId, name, logo, onClose}) {
     const [open, setOpen] = useState(false);
     
     const handleClose = () => {
@@ -56,7 +56,7 @@ export function CardRouter({address, abi, networkId, name, logo, onClose}) {
           </Card>
         </div>
         <div>
-          <UpdateRouterModal open={open} onClose={handleClose} networkId={networkId} name={name} logoUrl={logo} address={address} abiIn={abi}/>
+          <UpdateRouterModal open={open} onClose={handleClose} routerId={routerId} networkId={networkId} name={name} logoUrl={logo} address={address} abiIn={abi}/>
         </div>
       </div>
     )

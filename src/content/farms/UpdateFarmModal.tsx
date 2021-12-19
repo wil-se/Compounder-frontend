@@ -39,8 +39,12 @@ export function UpdateFarmModal(props) {
       onClose();
     };
     const handleListItemClick = (value) => {
-      let farm = new Farm();
-      farm.delete(farmID);
+      const requestOptions = {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({})
+      };
+      fetch(process.env.REACT_APP_DB_API_URL+'farm/'+farmID, requestOptions);
       onClose(value);
     };
     const handleRouterChange = (event) => {   
@@ -48,7 +52,8 @@ export function UpdateFarmModal(props) {
     };
 
     useEffect(() => {
-      new Router().all().then(e => e.docs.map((v, k) => <MenuItem key={v.id} data-name={v.data().name} value={v.id}>{v.data().name}</MenuItem>)).then((a) => {setRouterList(a);});
+      // new Router().all().then(e => e.docs.map((v, k) => <MenuItem key={v.id} data-name={v.data().name} value={v.id}>{v.data().name}</MenuItem>)).then((a) => {setRouterList(a);});
+      fetch(process.env.REACT_APP_DB_API_URL+"router").then(e => e.json()).then(j => j.routers).then(c => c.map((v, k) => <MenuItem key={v._id} data-name={v.name} value={v._id}>{v.name}</MenuItem>)).then((a) => {setRouterList(a)});
     }, []);
   
     return (

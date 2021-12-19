@@ -10,14 +10,12 @@ import {
     DocumentData,
   } from "firebase/firestore";
 
-
 export class Token {
     address: string;
     abi: string;
     network: string;
     name: string;
     logo: string;
-
 
     public constructor() {
         this.address = "NO_NAME";

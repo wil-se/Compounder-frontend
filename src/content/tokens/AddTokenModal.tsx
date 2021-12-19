@@ -34,9 +34,18 @@ export function AddTokenModal(props) {
       onClose();
     };
     const handleListItemClick = (value) => {
-      let token = new Token();
-      token.setToken(selectedAddress, abi, selectedNetwork, selectedValueName, selectedLogo);
-      token.create();
+      const requestOptions = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          address: selectedAddress,
+          abi: abi,
+          networkId: selectedNetwork,
+          name: selectedValueName,
+          logoUrl: selectedLogo
+        })
+      }
+      fetch(process.env.REACT_APP_DB_API_URL+'token', requestOptions);
       onClose(value);
     };
     const handleNetworkChange = (event) => {   
@@ -53,7 +62,8 @@ export function AddTokenModal(props) {
     };
 
     useEffect(() => {
-      new Network().all().then(e => e.docs.map((v, k) => <MenuItem key={v.id} data-name={v.data().name} value={v.id}>{v.data().name}</MenuItem>)).then((a) => {setNetworkList(a);});
+      // new Network().all().then(e => e.docs.map((v, k) => <MenuItem key={v.id} data-name={v.data().name} value={v.id}>{v.data().name}</MenuItem>)).then((a) => {setNetworkList(a);});
+      fetch(process.env.REACT_APP_DB_API_URL+"network").then(e => e.json()).then(j => j.networks).then(c => c.map((v, k) => <MenuItem key={v._id} data-name={v.name} value={v._id}>{v.name}</MenuItem>)).then((a) => {setNetworkList(a)});
     }, []);
   
     return (

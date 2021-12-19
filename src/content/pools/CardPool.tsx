@@ -21,7 +21,7 @@ const AvatarWrapper = styled(Avatar)(
 `
 );
 
-export function CardPool({onClose, poolID, name, logo, farm, reward, stake, exit, id }) {
+export function CardPool({onClose, poolId, name, logo, farm, reward, stake, exit, id }) {
     const [open, setOpen] = useState(false);
     
     const handleClose = () => {
@@ -56,7 +56,7 @@ export function CardPool({onClose, poolID, name, logo, farm, reward, stake, exit
           </Card>
         </div>
         <div>
-          <UpdatePoolModal open={open} onClose={handleClose} poolID={poolID} name={name} logo={logo} farm={farm} reward={reward} stake={stake} exit={exit} id={id}/>
+          <UpdatePoolModal open={open} onClose={handleClose} poolId={poolId} name={name} logo={logo} farm={farm} reward={reward} stake={stake} exit={exit} id={id}/>
         </div>
       </div>
     )

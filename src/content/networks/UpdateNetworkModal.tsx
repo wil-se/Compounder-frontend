@@ -10,16 +10,16 @@ import RemoveTwoToneIcon from '@mui/icons-material/RemoveTwoTone';
 import TextField from '@mui/material/TextField';
 
 
-export function UpdateNetworkModal({onClose, open, networkId, name, wss, rpc, logoUrl}) {
-    // const handleUpdate = () => {
-    //   var net = new Network();
-    //   console.log(selectedValueWss);
-    //   net.update(Number(networkId), Number(selectedValueId), selectedValueName, selectedValueWss.split(";"), selectedValueRpc.split(";"), selectedValueLogo);
-    //   onClose();
-    // };
-    const handleDelete = (value) => {
-      var net = new Network();
-      net.delete(value);
+export function UpdateNetworkModal({onClose, open, networkId, ID, name, wss, rpc, logoUrl}) {
+
+    function handleDelete() {
+      const requestOptions = {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({})
+      }
+      fetch(process.env.REACT_APP_DB_API_URL+'network/'+networkId, requestOptions);
+
       onClose();
     };
 
@@ -41,7 +41,7 @@ export function UpdateNetworkModal({onClose, open, networkId, name, wss, rpc, lo
               <TextField
                 id="outlined-helperText"
                 label="ID"
-                defaultValue={networkId}
+                defaultValue={ID}
                 helperText=""
                 type="number"
                 InputProps={{
@@ -90,7 +90,7 @@ export function UpdateNetworkModal({onClose, open, networkId, name, wss, rpc, lo
                 <AddIcon /> <ListItemText primary={"Update network"} />
             </ListItem>
           */}
-            <ListItem autoFocus button onClick={() => handleDelete(networkId)}>
+            <ListItem autoFocus button onClick={handleDelete}>
                 <RemoveTwoToneIcon /> <ListItemText primary={"Delete"} />
             </ListItem>
                  

@@ -24,7 +24,7 @@ export function AddCompounderModal({onClose,open,}) {
     const [harvestSpeedupValue, setHarvestSpeedupValue] = useState(1);
     const [swapSpeedupValue, setSwapSpeedupValue] = useState(1);
     const [approveSpeedupValue, setApproveSpeedupValue] = useState(1);
-    const [thesholdValue, setThesholdValue] = useState(1);
+    const [thresholdValue, setThresholdValue] = useState(1);
     const [slippageValue, setSlippageValue] = useState(1);
     const [stdGasValue, setStdGasValue] = useState(1);
 
@@ -32,9 +32,28 @@ export function AddCompounderModal({onClose,open,}) {
       onClose();
     };
     const handleListItemClick = (value) => {
-      let compounder = new Compounder();
-      compounder.setCompounder(selectedPool, tickValue, gasBoostValue, depositSpeedupValue, emergencySpeedupValue, harvestSpeedupValue, swapSpeedupValue, approveSpeedupValue, thesholdValue, slippageValue, stdGasValue);
-      compounder.create();
+      // let compounder = new Compounder();
+      // compounder.setCompounder(selectedPool, tickValue, gasBoostValue, depositSpeedupValue, emergencySpeedupValue, harvestSpeedupValue, swapSpeedupValue, approveSpeedupValue, thresholdValue, slippageValue, stdGasValue);
+      // compounder.create();
+      const requestOptions = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          poolId: selectedPool,
+          tick: tickValue,
+          gasBoost: gasBoostValue,
+          depositSpeedup: depositSpeedupValue,
+          emergencySpeedup: emergencySpeedupValue,
+          harvestSpeedup: harvestSpeedupValue, 
+          swapSpeedup: swapSpeedupValue,
+          approveSpeedup: approveSpeedupValue,
+          threshold: thresholdValue,
+          slippage: slippageValue,
+          stdGas: stdGasValue
+        })
+      }
+      fetch(process.env.REACT_APP_DB_API_URL+'compounder', requestOptions);
+
       onClose(value);
     };
     const handlePoolChange = (event) => {   
@@ -62,7 +81,7 @@ export function AddCompounderModal({onClose,open,}) {
         setApproveSpeedupValue(event.target.value);
     };
     const handleThesholdChange = (event) => {   
-        setThesholdValue(event.target.value);
+        setThresholdValue(event.target.value);
     };
     const handleSlippageChange = (event) => {   
         setSlippageValue(event.target.value);
@@ -72,7 +91,7 @@ export function AddCompounderModal({onClose,open,}) {
     };
 
     useEffect(() => {
-      new Pool().all().then(e => e.docs.map((v, k) => <MenuItem key={v.id} data-name={v.data().name} value={v.id}>{v.data().name}</MenuItem>)).then((a) => {setPoolList(a);});
+      fetch(process.env.REACT_APP_DB_API_URL+"pool").then(e => e.json()).then(j => j.pools).then(c => c.map((v, k) => <MenuItem key={v._id} data-name={v.name} value={v._id}>{v.name}</MenuItem>)).then((a) => {setPoolList(a)});
     }, []);
   
     return (
@@ -110,7 +129,7 @@ export function AddCompounderModal({onClose,open,}) {
             <ListItem>
               <TextField
                 id="outlined-helperText"
-                label="GAS BOOS"
+                label="GAS BOOST"
                 helperText=""
                 onChange={handleGasBoostChange}
                 fullWidth

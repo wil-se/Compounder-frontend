@@ -21,13 +21,17 @@ export function UpdateCompounderModal({onClose, open, id, pool, tick, gasBoost, 
       onClose();
     };
     const handleListItemClick = (value) => {
-      let compounder = new Compounder();
-      compounder.delete(id);
+      const requestOptions = {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({})
+      };
+      fetch(process.env.REACT_APP_DB_API_URL+'compounder/'+id, requestOptions);
       onClose(value);
     };
 
     useEffect(() => {
-      new Pool().all().then(e => e.docs.map((v, k) => <MenuItem key={v.id} data-name={v.data().name} value={v.id}>{v.data().name}</MenuItem>)).then((a) => {setPoolList(a);});
+      fetch(process.env.REACT_APP_DB_API_URL+"pool").then(e => e.json()).then(j => j.pools).then(c => c.map((v, k) => <MenuItem key={v._id} data-name={v.name} value={v._id}>{v.name}</MenuItem>)).then((a) => {setPoolList(a)});
     }, []);
   
     return (

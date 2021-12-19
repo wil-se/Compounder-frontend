@@ -22,7 +22,8 @@ export function RouterList() {
   };
 
   useEffect(() => {
-    new Router().all().then(e => e.docs.map((v, k) => <Grid key={k} xs={12} sm={6} md={3} item><CardRouter onClose={handleClose} key={v.id} name={v.data().name} networkId={v.data().network} logo={v.data().logo} address={v.data().address} abi={v.data().abi} ></CardRouter></Grid>)).then((a) => {setRouterList(a);})
+    // new Router().all().then(e => e.docs.map((v, k) => <Grid key={k} xs={12} sm={6} md={3} item><CardRouter onClose={handleClose} key={v.id} name={v.data().name} networkId={v.data().network} logo={v.data().logo} address={v.data().address} abi={v.data().abi} ></CardRouter></Grid>)).then((a) => {setRouterList(a);});
+    fetch(process.env.REACT_APP_DB_API_URL+"router").then(e => e.json()).then(j => j.routers).then(c => c.map((v, k) => <Grid key={k} xs={12} sm={6} md={3} item><CardRouter onClose={handleClose} key={v.id} routerId={v._id} name={v.name} networkId={v.networkId} logo={v.logoUrl} address={v.address} abi={v.abi} ></CardRouter></Grid>)).then((a) => {setRouterList(a)});
   }, []);
 
   return (

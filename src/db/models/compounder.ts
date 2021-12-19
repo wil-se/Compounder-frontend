@@ -27,7 +27,6 @@ export class Compounder {
     harvestSpeedup: number;
     swapSpeedup: number;
     approveSpeedup: number
-    deltaSeconds: number;
     theshold: number;
     slippage: number;
     stdGas: number;
@@ -44,7 +43,6 @@ export class Compounder {
         this.harvestSpeedup = 1;
         this.swapSpeedup = 1;
         this.approveSpeedup = 1;
-        this.deltaSeconds = 1;
         this.theshold = 1;
         this.slippage = 1;
         this.stdGas = 0.5;

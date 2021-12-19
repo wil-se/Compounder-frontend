@@ -21,7 +21,7 @@ const AvatarWrapper = styled(Avatar)(
 `
 );
 
-export function CardNetwork({name, networkId, logoUrl, wss, rpc, onClose}) {
+export function CardNetwork({name, networkId, ID, logoUrl, wss, rpc, onClose}) {
     const [open, setOpen] = useState(false);
     
     const handleClose = () => {
@@ -51,7 +51,7 @@ export function CardNetwork({name, networkId, logoUrl, wss, rpc, onClose}) {
                 </Grid>
                 <Grid item xs={12} display="flex" justifyContent="center" alignItems="center">
                 <Typography variant="subtitle1" noWrap>
-                  {networkId}
+                  {ID}
                 </Typography>
                 </Grid>
               </Grid>
@@ -59,7 +59,7 @@ export function CardNetwork({name, networkId, logoUrl, wss, rpc, onClose}) {
           </Card>
         </div>
         <div>
-          <UpdateNetworkModal open={open} onClose={handleClose} networkId={networkId} name={name} wss={wss} rpc={rpc} logoUrl={logoUrl} />
+          <UpdateNetworkModal open={open} onClose={handleClose} networkId={networkId} ID={ID} name={name} wss={wss} rpc={rpc} logoUrl={logoUrl} />
         </div>
       </div>
     )

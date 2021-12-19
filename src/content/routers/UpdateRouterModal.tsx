@@ -14,20 +14,27 @@ import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 
 
-export function UpdateRouterModal({onClose, open, networkId, name, address, abiIn, logoUrl}) {  
+export function UpdateRouterModal({onClose, open, routerId, networkId, name, address, abiIn, logoUrl}) {  
     const [networkList, setNetworkList] = useState([]);
    
     const handleClose = () => {
       onClose();
     };
     const handleListItemClick = (value) => {
-      let router = new Router();
-      router.delete(address);
+      // let router = new Router();
+      // router.delete(address);
+      const requestOptions = {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({})
+      };
+      fetch(process.env.REACT_APP_DB_API_URL+'router/'+routerId, requestOptions)
+      
       onClose(value);
     };
    
     useEffect(() => {
-      new Network().all().then(e => e.docs.map((v, k) => <MenuItem key={v.id} value={v.id}>{v.data().name}</MenuItem>)).then((a) => {setNetworkList(a);});
+      fetch(process.env.REACT_APP_DB_API_URL+"network").then(e => e.json()).then(j => j.networks).then(c => c.map((v, k) => <MenuItem key={v._id} data-name={v.name} value={v._id}>{v.name}</MenuItem>)).then((a) => {setNetworkList(a)});
     }, []);
   
 

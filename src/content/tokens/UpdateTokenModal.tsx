@@ -14,7 +14,7 @@ import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 
 
-export function UpdateTokenModal({onClose, open, networkId, name, address, abiIn, logoUrl}) {
+export function UpdateTokenModal({onClose, tokenId, open, networkId, name, address, abiIn, logoUrl}) {
     const [networkList, setNetworkList] = useState([]);
     const [selectedNetwork, setSelectedNetwork] = useState(networkId);
     
@@ -22,13 +22,18 @@ export function UpdateTokenModal({onClose, open, networkId, name, address, abiIn
       onClose();
     };
     const handleListItemClick = (value) => {
-      let token = new Token();
-      token.delete(address);
+      const requestOptions = {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({})
+      };
+      fetch(process.env.REACT_APP_DB_API_URL+'token/'+tokenId, requestOptions);
       onClose(value);
     };
 
     useEffect(() => {
-      new Network().all().then(e => e.docs.map((v, k) => <MenuItem key={v.id} value={v.id}>{v.data().name}</MenuItem>)).then((a) => {setNetworkList(a);});
+      // new Network().all().then(e => e.docs.map((v, k) => <MenuItem key={v.id} value={v.id}>{v.data().name}</MenuItem>)).then((a) => {setNetworkList(a);});
+      fetch(process.env.REACT_APP_DB_API_URL+"network").then(e => e.json()).then(j => j.networks).then(c => c.map((v, k) => <MenuItem key={v._id} data-name={v.name} value={v._id}>{v.name}</MenuItem>)).then((a) => {setNetworkList(a)});
     }, []);
   
     return (

@@ -32,9 +32,21 @@ export function AddPoolModal({onClose, open,}) {
       onClose();
     };
     const handleAdd = (value) => {
-      let pool = new Pool();
-      pool.setPool(selectedValueName, selectedFarm, selectedRewardToken, selectedStakeToken, selectedExitToken, selectedPid, selectedLogo);
-      pool.create();
+      const requestOptions = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: selectedValueName,
+          farmId: selectedFarm,
+          rewardTokenId: selectedRewardToken,
+          stakeTokenId: selectedStakeToken,
+          exitTokenId: selectedExitToken,
+          id: selectedPid,
+          logoUrl: selectedLogo,
+        })
+      }
+      fetch(process.env.REACT_APP_DB_API_URL+'pool', requestOptions);
+
       onClose(value);
     };
     const handleFarmChange = (event) => {   
@@ -60,8 +72,8 @@ export function AddPoolModal({onClose, open,}) {
     };
 
     useEffect(() => {
-      new Farm().all().then(e => e.docs.map((v, k) => <MenuItem key={v.id} data-name={v.data().name} value={v.id}>{v.data().name}</MenuItem>)).then((a) => {setFarmList(a);});
-      new Token().all().then(e => e.docs.map((v, k) => <MenuItem key={v.id} data-name={v.data().name} value={v.id}>{v.data().name}</MenuItem>)).then((a) => {setStakeTokenList(a);setRewardTokenList(a);setExitTokenList(a);});
+      fetch(process.env.REACT_APP_DB_API_URL+"farm").then(e => e.json()).then(j => j.farms).then(c => c.map((v, k) => <MenuItem key={v._id} data-name={v.name} value={v._id}>{v.name}</MenuItem>)).then((a) => {setFarmList(a)});
+      fetch(process.env.REACT_APP_DB_API_URL+"token").then(e => e.json()).then(j => j.tokens).then(c => c.map((v, k) => <MenuItem key={v._id} data-name={v.name} value={v._id}>{v.name}</MenuItem>)).then((a) => {setStakeTokenList(a);setRewardTokenList(a);setExitTokenList(a);});
     }, []);
   
     return (

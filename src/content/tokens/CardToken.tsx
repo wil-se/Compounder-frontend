@@ -21,7 +21,7 @@ const AvatarWrapper = styled(Avatar)(
 `
 );
 
-export function CardToken({address, abi, networkId, name, logo, onClose}) {
+export function CardToken({address, tokenId, abi, networkId, name, logo, onClose}) {
 
     const [open, setOpen] = useState(false);
     
@@ -57,7 +57,7 @@ export function CardToken({address, abi, networkId, name, logo, onClose}) {
         </Card>
       </div>
       <div>
-      <UpdateTokenModal open={open} onClose={handleClose} networkId={networkId} name={name} logoUrl={logo} address={address} abiIn={abi}/>
+      <UpdateTokenModal open={open} onClose={handleClose} tokenId={tokenId} networkId={networkId} name={name} logoUrl={logo} address={address} abiIn={abi}/>
       </div>
       </div>
     )

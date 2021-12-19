@@ -20,9 +20,19 @@ export function AddNetworkModal({onClose, open}) {
       onClose();
     };
     const handleAdd = (value) => {
-      var net = new Network();
-      net.setNetwork(Number(selectedValueId), selectedValueName, selectedValueWss.split(";"), selectedValueRpc.split(";"), selectedValueLogo);
-      net.create();  
+      const requestOptions = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          id: selectedValueId,
+          name: selectedValueName,
+          wss: selectedValueWss.split(";"),
+          rpc: selectedValueRpc.split(";"),
+          logoUrl: selectedValueLogo,
+        })
+      }
+      fetch(process.env.REACT_APP_DB_API_URL+'network', requestOptions);
+
       onClose(value);
     };
     const handleSelectName = (val) => {
