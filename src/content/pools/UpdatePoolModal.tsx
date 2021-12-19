@@ -6,13 +6,10 @@ import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import RemoveTwoToneIcon from '@mui/icons-material/RemoveTwoTone';
 import TextField from '@mui/material/TextField';
-import { Farm } from '../../db/models/farm';
 import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
-import { Token } from '../../db/models/token';
-import { Pool } from '../../db/models/pool';
 
 
 export function UpdatePoolModal({onClose, open, poolId, name, logo, farm, reward, stake, exit, id}) {

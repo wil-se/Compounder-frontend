@@ -6,7 +6,6 @@ import {
   import AddTwoToneIcon from '@mui/icons-material/AddTwoTone';
   import { CardFarm } from './CardFarm'
   import { useState, useEffect } from 'react';
-  import { Farm } from '../../db/models/farm';
   import { AddFarmModal } from './AddFarmModal'
   
   

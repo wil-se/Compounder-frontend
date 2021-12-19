@@ -6,7 +6,6 @@ import {
 import AddTwoToneIcon from '@mui/icons-material/AddTwoTone';
 import { CardToken } from './CardToken'
 import { useState, useEffect } from 'react';
-import { Token } from '../../db/models/token';
 import { AddTokenModal } from './AddTokenModal'
 
 

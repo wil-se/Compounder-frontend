@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import { Network } from '../../db/models/network';
 import Dialog from '@mui/material/Dialog';
 import DialogTitle from '@mui/material/DialogTitle';
 import List from '@mui/material/List';
@@ -7,7 +6,6 @@ import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import RemoveTwoToneIcon from '@mui/icons-material/RemoveTwoTone';
 import TextField from '@mui/material/TextField';
-import { Token } from '../../db/models/token';
 import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';

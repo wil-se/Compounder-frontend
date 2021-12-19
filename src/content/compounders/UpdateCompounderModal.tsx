@@ -10,8 +10,6 @@ import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
-import { Compounder } from '../../db/models/compounder';
-import { Pool } from '../../db/models/pool';
 
 
 export function UpdateCompounderModal({onClose, open, id, pool, tick, gasBoost, depositSpeedup, emergencySpeedup, harvestSpeedup, swapSpeedup, approveSpeedup, theshold, slippage, stdGas,}) {

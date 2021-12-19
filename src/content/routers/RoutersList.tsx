@@ -6,7 +6,6 @@ import {
 import AddTwoToneIcon from '@mui/icons-material/AddTwoTone';
 import { CardRouter } from './CardRouter'
 import { useState, useEffect } from 'react';
-import { Router } from '../../db/models/router';
 import { AddRouterModal } from './AddRouterModal'
 
 

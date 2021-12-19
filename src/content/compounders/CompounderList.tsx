@@ -6,7 +6,6 @@ import {
   import AddTwoToneIcon from '@mui/icons-material/AddTwoTone';
   import { CardCompounder } from './CardCompounder'
   import { useState, useEffect } from 'react';
-  import { Compounder } from '../../db/models/compounder';
   import { AddCompounderModal } from './AddCompounderModal'
 
   

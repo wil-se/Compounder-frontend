@@ -10,8 +10,6 @@ import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
-import { Pool } from '../../db/models/pool';
-import { Compounder } from '../../db/models/compounder';
 
 
 export function AddCompounderModal({onClose,open,}) {

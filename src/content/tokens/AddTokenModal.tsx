@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import { Network } from '../../db/models/network';
 import Dialog from '@mui/material/Dialog';
 import DialogTitle from '@mui/material/DialogTitle';
 import List from '@mui/material/List';
@@ -11,7 +10,6 @@ import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
-import { Token } from '../../db/models/token';
 
 
 export function AddTokenModal(props) {

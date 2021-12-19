@@ -10,9 +10,6 @@ import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
-import { Pool } from '../../db/models/pool';
-import { Token } from '../../db/models/token';
-import { Farm } from '../../db/models/farm';
 
 
 export function AddPoolModal({onClose, open,}) {

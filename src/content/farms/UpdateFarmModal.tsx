@@ -6,7 +6,6 @@ import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import RemoveTwoToneIcon from '@mui/icons-material/RemoveTwoTone';
 import TextField from '@mui/material/TextField';
-import { Farm } from '../../db/models/farm';
 import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
@@ -14,7 +13,6 @@ import MenuItem from '@mui/material/MenuItem';
 import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
-import { Router } from '../../db/models/router';
 
 
 export function UpdateFarmModal(props) {

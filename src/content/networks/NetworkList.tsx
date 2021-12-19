@@ -6,7 +6,6 @@ import {
 import AddTwoToneIcon from '@mui/icons-material/AddTwoTone';
 import { CardNetwork } from './CardNetwork'
 import { useState, useEffect } from 'react';
-import { Network } from '../../db/models/network';
 import { AddNetworkModal } from './AddNetworkModal'
 
 

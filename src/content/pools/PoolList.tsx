@@ -6,7 +6,6 @@ import {
   import AddTwoToneIcon from '@mui/icons-material/AddTwoTone';
   import { CardPool } from './CardPool'
   import { useState, useEffect } from 'react';
-  import { Pool } from '../../db/models/pool';
   import { AddPoolModal } from './AddPoolModal'
   
   

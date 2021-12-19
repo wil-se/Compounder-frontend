@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { Network } from '../../db/models/network';
 import Dialog from '@mui/material/Dialog';
 import DialogTitle from '@mui/material/DialogTitle';
 import List from '@mui/material/List';
